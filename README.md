@@ -1,2 +1,2 @@
 # bor-network
-Bluetooth Onion Router. A Decentralized Bluetooth network inspireded by TOR
+Bluetooth Onion Router. A Decentralized Bluetooth network inspired by TOR
