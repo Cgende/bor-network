@@ -1,4 +1,13 @@
+import 'dart:async';
+import 'dart:collection';
+import 'dart:convert';
+import 'dart:math';
+import 'dart:typed_data';
+import 'dart:core';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Bluetooth Demo',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -24,7 +33,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Bluetooth Demo'),
     );
   }
 }
@@ -48,18 +57,84 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  final flutterReactiveBle = FlutterReactiveBle();
+  List discoveredDevices = [];
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+  StreamController<List> discoveredDevicesStreamController = StreamController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    //  BLE
+    flutterReactiveBle.statusStream.listen((status) async {
+      debugPrint("BLE STATUS: ${status.toString()}");
+
+      if(status == BleStatus.ready){
+        flutterReactiveBle.scanForDevices(scanMode: ScanMode.lowLatency, withServices: []).listen((device) {
+        if(!discoveredDevices.any((element) => element.id == device.id)){
+          discoveredDevices.add(device);
+          discoveredDevicesStreamController.add(discoveredDevices);
+          print(discoveredDevices.length);
+        }
+
+          //code for handling results
+        }, onError: (error) {
+          //code for handling error
+        });
+
+
+        // while(true) {
+        //   flutterReactiveBle.connectToDevice(
+        //     // id: "94:B8:6D:F0:BB:48", //WINDOWS
+        //     id: "98:E0:D9:A2:34:A0", // MAC
+        //     connectionTimeout: const Duration(seconds: 15),
+        //   ).listen((connectionState) {
+        //     print("CONNECTION STATE UPDATE: $connectionState");
+        //
+        //     // Handle connection state updates
+        //   }, onError: (Object error) {
+        //     print("ERROR: $error");
+        //     // Handle a possible error
+        //   });
+        //
+        //   await Future.delayed(Duration(seconds: 15));
+        // }
+      }
+      //todo handle statuses
     });
+
+// // BLUETOOTH CLASSIC
+//
+//     () async {
+//       try {
+//         BluetoothConnection connection =
+//             await BluetoothConnection.toAddress("94:B8:6D:F0:BB:48"); // WINDOWS
+//         // BluetoothConnection connection =
+//         //     await BluetoothConnection.toAddress("98:E0:D9:A2:34:A0"); // MAC
+//
+//         print('Connected to the device');
+//
+//         connection.input?.listen((Uint8List data) {
+//           print('Data incoming: ${ascii.decode(data)}');
+//           connection.output.add(data); // Sending data
+//
+//           if (ascii.decode(data).contains('!')) {
+//             connection.finish(); // Closing connection
+//             print('Disconnecting by local host');
+//           }
+//         }).onDone(() {
+//           print('Disconnected by remote request');
+//         });
+//       } catch (exception) {
+//         print('Cannot connect, exception occured');
+//       }
+//     }.call();
   }
+
+  final List<String> entries = <String>['A', 'B', 'C'];
+  final List<int> colorCodes = <int>[600, 500, 100];
+
 
   @override
   Widget build(BuildContext context) {
@@ -78,38 +153,25 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+        child: StreamBuilder<List>(
+          stream: discoveredDevicesStreamController.stream,
+          builder: (context, snapshot) {
+            if(snapshot.data==null) return Container();
+
+            return ListView.builder(
+                padding: const EdgeInsets.all(8),
+                itemCount: snapshot.data?.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    height: 50,
+                    color: Colors.amber,
+                    child: Center(child: Text('Entry ${snapshot.data![index]}')),
+                  );
+                }
+            );
+          }
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
