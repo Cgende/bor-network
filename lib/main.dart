@@ -131,39 +131,39 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
 
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
+    return Scaffold(
           backgroundColor: Colors.black54,
-          body: ListView(children: <Widget>[
-            Column(children: <Widget>[
-              Container(
-                margin: const EdgeInsets.only(top: 50),
-                child: const Icon(Icons.bluetooth,
-                size: 100,
-                color: Colors.white,
-                shadows: [
-                  Shadow(
-                    color: Colors.blue,
-                    blurRadius: 3,
-                    offset: Offset(0, 5)),
-                  Shadow(
-                      color: Colors.blue,
-                      blurRadius: 3,
-                      offset: Offset(5, 0)),
-                  Shadow(
-                      color: Colors.blue,
-                      blurRadius: 3,
-                      offset: Offset(0, -5)),
-                  Shadow(
-                      color: Colors.blue,
-                      blurRadius: 3,
-                      offset: Offset(-5, 0))]
-                ),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+              const Align(
+                alignment: Alignment.center,
+                heightFactor: 1.5,
+                child: Icon(Icons.bluetooth,
+                    size: 100,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(
+                          color: Colors.blue,
+                          blurRadius: 3,
+                          offset: Offset(0, 5)),
+                      Shadow(
+                          color: Colors.blue,
+                          blurRadius: 3,
+                          offset: Offset(5, 0)),
+                      Shadow(
+                          color: Colors.blue,
+                          blurRadius: 3,
+                          offset: Offset(0, -5)),
+                      Shadow(
+                          color: Colors.blue,
+                          blurRadius: 3,
+                          offset: Offset(-5, 0))
+                    ]),
               ),
-              Container(
-                  margin: const EdgeInsets.only(top: 100, bottom: 50),
-                  child: const Text(
+              const Align(
+                  alignment: Alignment.center,
+                  child: Text(
                     "The BOR Network",
                     style: TextStyle(
                         color: Colors.blue,
@@ -175,14 +175,14 @@ class _MyHomePageState extends State<MyHomePage> {
                               offset: Offset(0, 5))
                         ]),
                   )),
-              Container(
-                  margin: const EdgeInsets.only(top: 50),
+              Align(
+                  alignment: Alignment.center,
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const DeviceList()));
+                              builder: (context) => DeviceList()));
                     },
                     style: ElevatedButton.styleFrom(
                         textStyle: const TextStyle(
@@ -194,19 +194,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         elevation: 20.0),
                     child: const Text("Connect"),
                   )),
-              Container(
-                margin: const EdgeInsets.only(top: 200),
+              Align(
+                alignment: Alignment.bottomRight,
                 child: RichText(
                   text: const TextSpan(
                     children: [
                       WidgetSpan(
-                        child: Icon(Icons.copyright, size: 14, color: Colors.white),
+                        child: Icon(Icons.copyright,
+                            size: 16, color: Colors.white),
                       ),
                       TextSpan(
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12
-                        ),
+                        style: TextStyle(color: Colors.white, fontSize: 14),
                         text: " The BORing Team",
                       ),
                     ],
@@ -214,7 +212,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               )
             ])
-          ]),
-        ));
+        );
   }
 }
