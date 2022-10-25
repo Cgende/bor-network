@@ -49,13 +49,13 @@ void SysUartInit();
 void EnableCaches();
 void DisableCaches();
 
-//int main()
-//{
-//    DemoInitialize();
-//    DemoRun();
-//    DisableCaches();
-//    return XST_SUCCESS;
-//}
+int main()
+{
+    DemoInitialize();
+    DemoRun();
+    DisableCaches();
+    return XST_SUCCESS;
+}
 
 void DemoInitialize()
 {
