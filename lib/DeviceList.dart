@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/Messaging.dart';
 
+class Device{
+  String name;
+  Device({required this.name});
+}
 
 class DeviceList extends StatefulWidget {
 
@@ -9,8 +13,13 @@ class DeviceList extends StatefulWidget {
 }
 
 class _MyPageTwoState extends State<DeviceList> {
-  List<String> device = ["Device 1", "Device 2"];
+  List<Device> device = [Device(name: "Device 1"), Device(name: "Device 2")];
 
+  @override
+  void initState(){
+    super.initState();
+    device.add(Device(name: "Device 3"));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +53,7 @@ class _MyPageTwoState extends State<DeviceList> {
                             foregroundColor: Colors.white,
                             fixedSize: const Size(200, 50),
                             side: const BorderSide(color: Colors.white)),
-                        child: Text(device[index]),
+                        child: Text(device[index].name),
                       );
                       //Text(devices[index]);
                     })),
