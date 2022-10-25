@@ -1,10 +1,10 @@
 -- Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
--- Date        : Tue Sep 27 22:00:20 2022
+-- Date        : Tue Oct 25 13:10:50 2022
 -- Host        : CB195-UL-41 running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode funcsim
---               C:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/design_1_PmodBLE_0_0_sim_netlist.vhdl
+--               C:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/design_1_PmodBLE_0_0_sim_netlist.vhdl
 -- Design      : design_1_PmodBLE_0_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -13034,7 +13034,7 @@ architecture STRUCTURE of design_1_PmodBLE_0_0 is
   attribute X_INTERFACE_INFO of S_AXI_GPIO_rvalid : signal is "xilinx.com:interface:aximm:1.0 S_AXI_GPIO RVALID";
   attribute X_INTERFACE_INFO of S_AXI_GPIO_wready : signal is "xilinx.com:interface:aximm:1.0 S_AXI_GPIO WREADY";
   attribute X_INTERFACE_INFO of S_AXI_GPIO_wvalid : signal is "xilinx.com:interface:aximm:1.0 S_AXI_GPIO WVALID";
-  attribute X_INTERFACE_PARAMETER of S_AXI_GPIO_wvalid : signal is "XIL_INTERFACENAME S_AXI_GPIO, DATA_WIDTH 32, PROTOCOL AXI4LITE, ID_WIDTH 0, ADDR_WIDTH 12, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 0, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, NUM_READ_OUTSTANDING 1, NUM_WRITE_OUTSTANDING 1, MAX_BURST_LENGTH 1, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN /clk_wiz_clk_out1, INSERT_VIP 0";
+  attribute X_INTERFACE_PARAMETER of S_AXI_GPIO_wvalid : signal is "XIL_INTERFACENAME S_AXI_GPIO, DATA_WIDTH 32, PROTOCOL AXI4LITE, ID_WIDTH 0, ADDR_WIDTH 12, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 0, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, NUM_READ_OUTSTANDING 1, NUM_WRITE_OUTSTANDING 1, MAX_BURST_LENGTH 1, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_clk_out1, INSERT_VIP 0";
   attribute X_INTERFACE_INFO of S_AXI_UART_arready : signal is "xilinx.com:interface:aximm:1.0 S_AXI_UART ARREADY";
   attribute X_INTERFACE_INFO of S_AXI_UART_arvalid : signal is "xilinx.com:interface:aximm:1.0 S_AXI_UART ARVALID";
   attribute X_INTERFACE_INFO of S_AXI_UART_awready : signal is "xilinx.com:interface:aximm:1.0 S_AXI_UART AWREADY";
@@ -13045,9 +13045,9 @@ architecture STRUCTURE of design_1_PmodBLE_0_0 is
   attribute X_INTERFACE_INFO of S_AXI_UART_rvalid : signal is "xilinx.com:interface:aximm:1.0 S_AXI_UART RVALID";
   attribute X_INTERFACE_INFO of S_AXI_UART_wready : signal is "xilinx.com:interface:aximm:1.0 S_AXI_UART WREADY";
   attribute X_INTERFACE_INFO of S_AXI_UART_wvalid : signal is "xilinx.com:interface:aximm:1.0 S_AXI_UART WVALID";
-  attribute X_INTERFACE_PARAMETER of S_AXI_UART_wvalid : signal is "XIL_INTERFACENAME S_AXI_UART, DATA_WIDTH 32, PROTOCOL AXI4LITE, ID_WIDTH 0, ADDR_WIDTH 13, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 0, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, NUM_READ_OUTSTANDING 1, NUM_WRITE_OUTSTANDING 1, MAX_BURST_LENGTH 1, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN /clk_wiz_clk_out1, INSERT_VIP 0";
+  attribute X_INTERFACE_PARAMETER of S_AXI_UART_wvalid : signal is "XIL_INTERFACENAME S_AXI_UART, DATA_WIDTH 32, PROTOCOL AXI4LITE, ID_WIDTH 0, ADDR_WIDTH 13, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 0, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, NUM_READ_OUTSTANDING 1, NUM_WRITE_OUTSTANDING 1, MAX_BURST_LENGTH 1, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_clk_out1, INSERT_VIP 0";
   attribute X_INTERFACE_INFO of s_axi_aclk : signal is "xilinx.com:signal:clock:1.0 CLK.S_AXI_ACLK CLK";
-  attribute X_INTERFACE_PARAMETER of s_axi_aclk : signal is "XIL_INTERFACENAME CLK.S_AXI_ACLK, FREQ_HZ 100000000, PHASE 0.000, ASSOCIATED_BUSIF S_AXI_GPIO:S_AXI_UART, ASSOCIATED_RESET s_axi_aresetn, CLK_DOMAIN /clk_wiz_clk_out1, INSERT_VIP 0";
+  attribute X_INTERFACE_PARAMETER of s_axi_aclk : signal is "XIL_INTERFACENAME CLK.S_AXI_ACLK, ASSOCIATED_BUSIF S_AXI_GPIO:S_AXI_UART, ASSOCIATED_RESET s_axi_aresetn, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_clk_out1, INSERT_VIP 0";
   attribute X_INTERFACE_INFO of s_axi_aresetn : signal is "xilinx.com:signal:reset:1.0 RST.S_AXI_ARESETN RST";
   attribute X_INTERFACE_PARAMETER of s_axi_aresetn : signal is "XIL_INTERFACENAME RST.S_AXI_ARESETN, POLARITY ACTIVE_LOW, INSERT_VIP 0";
   attribute X_INTERFACE_INFO of S_AXI_GPIO_araddr : signal is "xilinx.com:interface:aximm:1.0 S_AXI_GPIO ARADDR";

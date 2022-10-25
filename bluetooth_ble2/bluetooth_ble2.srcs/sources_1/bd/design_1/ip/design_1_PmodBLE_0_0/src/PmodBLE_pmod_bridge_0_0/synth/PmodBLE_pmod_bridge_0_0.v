@@ -47,8 +47,8 @@
 // DO NOT MODIFY THIS FILE.
 
 
-// IP VLNV: digilentinc.com:ip:pmod_bridge:1.0
-// IP Revision: 14
+// IP VLNV: digilentinc.com:ip:pmod_bridge:1.1
+// IP Revision: 6
 
 (* X_CORE_INFO = "pmod_concat,Vivado 2019.1" *)
 (* CHECK_LICENSE_TYPE = "PmodBLE_pmod_bridge_0_0,pmod_concat,{}" *)

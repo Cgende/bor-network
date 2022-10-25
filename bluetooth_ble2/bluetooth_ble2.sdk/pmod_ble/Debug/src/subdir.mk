@@ -8,6 +8,7 @@ LD_SRCS += \
 
 C_SRCS += \
 ../src/aes.c \
+../src/connections.c \
 ../src/helloworld.c \
 ../src/main.c \
 ../src/platform.c \
@@ -15,6 +16,7 @@ C_SRCS += \
 
 OBJS += \
 ./src/aes.o \
+./src/connections.o \
 ./src/helloworld.o \
 ./src/main.o \
 ./src/platform.o \
@@ -22,6 +24,7 @@ OBJS += \
 
 C_DEPS += \
 ./src/aes.d \
+./src/connections.d \
 ./src/helloworld.d \
 ./src/main.d \
 ./src/platform.d \

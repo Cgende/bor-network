@@ -2,62 +2,62 @@
 # Vivado v2019.1 (64-bit)
 # SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
 # IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
-# Start of session at: Tue Sep 27 22:02:11 2022
-# Process ID: 12820
-# Current directory: C:/Users/behaje/bluetooth_ble2/bluetooth_ble2.runs/impl_1
+# Start of session at: Tue Oct 25 13:12:12 2022
+# Process ID: 7324
+# Current directory: C:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.runs/impl_1
 # Command line: vivado.exe -log design_1_wrapper.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source design_1_wrapper.tcl -notrace
-# Log file: C:/Users/behaje/bluetooth_ble2/bluetooth_ble2.runs/impl_1/design_1_wrapper.vdi
-# Journal file: C:/Users/behaje/bluetooth_ble2/bluetooth_ble2.runs/impl_1\vivado.jou
+# Log file: C:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.runs/impl_1/design_1_wrapper.vdi
+# Journal file: C:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.runs/impl_1\vivado.jou
 #-----------------------------------------------------------
 source design_1_wrapper.tcl -notrace
 INFO: [IP_Flow 19-234] Refreshing IP repositories
-INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/behaje/Downloads/vivado-library-v2019.1-1'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/behaje/Documents/bor_network/vivado-library-zmod-v1-2019.1-2'.
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2019.1/data/ip'.
 Command: link_design -top design_1_wrapper -part xc7z020clg400-1
 Design is defaulting to srcset: sources_1
 Design is defaulting to constrset: constrs_1
 INFO: [Device 21-403] Loading part xc7z020clg400-1
-INFO: [Project 1-454] Reading design checkpoint 'c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/design_1_PmodBLE_0_0.dcp' for cell 'design_1_i/PmodBLE_0'
-INFO: [Project 1-454] Reading design checkpoint 'c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0.dcp' for cell 'design_1_i/clk_wiz'
-INFO: [Project 1-454] Reading design checkpoint 'c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.dcp' for cell 'design_1_i/processing_system7_0'
-INFO: [Project 1-454] Reading design checkpoint 'c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_clk_wiz_100M_0/design_1_rst_clk_wiz_100M_0.dcp' for cell 'design_1_i/rst_clk_wiz_100M'
-INFO: [Project 1-454] Reading design checkpoint 'c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_50M_0/design_1_rst_ps7_0_50M_0.dcp' for cell 'design_1_i/rst_ps7_0_50M'
-INFO: [Project 1-454] Reading design checkpoint 'c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_xbar_0/design_1_xbar_0.dcp' for cell 'design_1_i/ps7_0_axi_periph/xbar'
-INFO: [Project 1-454] Reading design checkpoint 'c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_auto_cc_0/design_1_auto_cc_0.dcp' for cell 'design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc'
-INFO: [Project 1-454] Reading design checkpoint 'c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_0/design_1_auto_pc_0.dcp' for cell 'design_1_i/ps7_0_axi_periph/s00_couplers/auto_pc'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/design_1_PmodBLE_0_0.dcp' for cell 'design_1_i/PmodBLE_0'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0.dcp' for cell 'design_1_i/clk_wiz'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.dcp' for cell 'design_1_i/processing_system7_0'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_clk_wiz_100M_0/design_1_rst_clk_wiz_100M_0.dcp' for cell 'design_1_i/rst_clk_wiz_100M'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_50M_0/design_1_rst_ps7_0_50M_0.dcp' for cell 'design_1_i/rst_ps7_0_50M'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_xbar_0/design_1_xbar_0.dcp' for cell 'design_1_i/ps7_0_axi_periph/xbar'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_auto_cc_0/design_1_auto_cc_0.dcp' for cell 'design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_0/design_1_auto_pc_0.dcp' for cell 'design_1_i/ps7_0_axi_periph/s00_couplers/auto_pc'
 INFO: [Netlist 29-17] Analyzing 76 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-479] Netlist was created with Vivado 2019.1
 INFO: [Project 1-570] Preparing netlist for logic optimization
-Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/design_1_PmodBLE_0_0_board.xdc] for cell 'design_1_i/PmodBLE_0/inst'
-Finished Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/design_1_PmodBLE_0_0_board.xdc] for cell 'design_1_i/PmodBLE_0/inst'
-Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_axi_uart16550_0_0/PmodBLE_axi_uart16550_0_0_board.xdc] for cell 'design_1_i/PmodBLE_0/inst/axi_uart16550_0/U0'
-Finished Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_axi_uart16550_0_0/PmodBLE_axi_uart16550_0_0_board.xdc] for cell 'design_1_i/PmodBLE_0/inst/axi_uart16550_0/U0'
-Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_axi_uart16550_0_0/PmodBLE_axi_uart16550_0_0.xdc] for cell 'design_1_i/PmodBLE_0/inst/axi_uart16550_0/U0'
-Finished Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_axi_uart16550_0_0/PmodBLE_axi_uart16550_0_0.xdc] for cell 'design_1_i/PmodBLE_0/inst/axi_uart16550_0/U0'
-Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_pmod_bridge_0_0/PmodBLE_pmod_bridge_0_0_board.xdc] for cell 'design_1_i/PmodBLE_0/inst/pmod_bridge_0/inst'
-Finished Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_pmod_bridge_0_0/PmodBLE_pmod_bridge_0_0_board.xdc] for cell 'design_1_i/PmodBLE_0/inst/pmod_bridge_0/inst'
-Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_axi_gpio_0_0/PmodBLE_axi_gpio_0_0_board.xdc] for cell 'design_1_i/PmodBLE_0/inst/axi_gpio_0/U0'
-Finished Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_axi_gpio_0_0/PmodBLE_axi_gpio_0_0_board.xdc] for cell 'design_1_i/PmodBLE_0/inst/axi_gpio_0/U0'
-Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_axi_gpio_0_0/PmodBLE_axi_gpio_0_0.xdc] for cell 'design_1_i/PmodBLE_0/inst/axi_gpio_0/U0'
-Finished Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_axi_gpio_0_0/PmodBLE_axi_gpio_0_0.xdc] for cell 'design_1_i/PmodBLE_0/inst/axi_gpio_0/U0'
-Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc] for cell 'design_1_i/processing_system7_0/inst'
-Finished Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc] for cell 'design_1_i/processing_system7_0/inst'
-Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_50M_0/design_1_rst_ps7_0_50M_0_board.xdc] for cell 'design_1_i/rst_ps7_0_50M/U0'
-Finished Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_50M_0/design_1_rst_ps7_0_50M_0_board.xdc] for cell 'design_1_i/rst_ps7_0_50M/U0'
-Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_50M_0/design_1_rst_ps7_0_50M_0.xdc] for cell 'design_1_i/rst_ps7_0_50M/U0'
-Finished Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_50M_0/design_1_rst_ps7_0_50M_0.xdc] for cell 'design_1_i/rst_ps7_0_50M/U0'
-Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0_board.xdc] for cell 'design_1_i/clk_wiz/inst'
-Finished Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0_board.xdc] for cell 'design_1_i/clk_wiz/inst'
-Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0.xdc] for cell 'design_1_i/clk_wiz/inst'
-INFO: [Timing 38-35] Done setting XDC timing constraints. [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0.xdc:57]
-INFO: [Timing 38-2] Deriving generated clocks [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0.xdc:57]
-get_clocks: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1330.750 ; gain = 578.484
-Finished Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0.xdc] for cell 'design_1_i/clk_wiz/inst'
-Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_clk_wiz_100M_0/design_1_rst_clk_wiz_100M_0_board.xdc] for cell 'design_1_i/rst_clk_wiz_100M/U0'
-Finished Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_clk_wiz_100M_0/design_1_rst_clk_wiz_100M_0_board.xdc] for cell 'design_1_i/rst_clk_wiz_100M/U0'
-Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_clk_wiz_100M_0/design_1_rst_clk_wiz_100M_0.xdc] for cell 'design_1_i/rst_clk_wiz_100M/U0'
-Finished Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_clk_wiz_100M_0/design_1_rst_clk_wiz_100M_0.xdc] for cell 'design_1_i/rst_clk_wiz_100M/U0'
+Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/design_1_PmodBLE_0_0_board.xdc] for cell 'design_1_i/PmodBLE_0/inst'
+Finished Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/design_1_PmodBLE_0_0_board.xdc] for cell 'design_1_i/PmodBLE_0/inst'
+Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_axi_uart16550_0_0/PmodBLE_axi_uart16550_0_0_board.xdc] for cell 'design_1_i/PmodBLE_0/inst/axi_uart16550_0/U0'
+Finished Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_axi_uart16550_0_0/PmodBLE_axi_uart16550_0_0_board.xdc] for cell 'design_1_i/PmodBLE_0/inst/axi_uart16550_0/U0'
+Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_axi_uart16550_0_0/PmodBLE_axi_uart16550_0_0.xdc] for cell 'design_1_i/PmodBLE_0/inst/axi_uart16550_0/U0'
+Finished Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_axi_uart16550_0_0/PmodBLE_axi_uart16550_0_0.xdc] for cell 'design_1_i/PmodBLE_0/inst/axi_uart16550_0/U0'
+Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_pmod_bridge_0_0/PmodBLE_pmod_bridge_0_0_board.xdc] for cell 'design_1_i/PmodBLE_0/inst/pmod_bridge_0/inst'
+Finished Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_pmod_bridge_0_0/PmodBLE_pmod_bridge_0_0_board.xdc] for cell 'design_1_i/PmodBLE_0/inst/pmod_bridge_0/inst'
+Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_axi_gpio_0_0/PmodBLE_axi_gpio_0_0_board.xdc] for cell 'design_1_i/PmodBLE_0/inst/axi_gpio_0/U0'
+Finished Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_axi_gpio_0_0/PmodBLE_axi_gpio_0_0_board.xdc] for cell 'design_1_i/PmodBLE_0/inst/axi_gpio_0/U0'
+Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_axi_gpio_0_0/PmodBLE_axi_gpio_0_0.xdc] for cell 'design_1_i/PmodBLE_0/inst/axi_gpio_0/U0'
+Finished Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_axi_gpio_0_0/PmodBLE_axi_gpio_0_0.xdc] for cell 'design_1_i/PmodBLE_0/inst/axi_gpio_0/U0'
+Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc] for cell 'design_1_i/processing_system7_0/inst'
+Finished Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc] for cell 'design_1_i/processing_system7_0/inst'
+Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_50M_0/design_1_rst_ps7_0_50M_0_board.xdc] for cell 'design_1_i/rst_ps7_0_50M/U0'
+Finished Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_50M_0/design_1_rst_ps7_0_50M_0_board.xdc] for cell 'design_1_i/rst_ps7_0_50M/U0'
+Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_50M_0/design_1_rst_ps7_0_50M_0.xdc] for cell 'design_1_i/rst_ps7_0_50M/U0'
+Finished Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_50M_0/design_1_rst_ps7_0_50M_0.xdc] for cell 'design_1_i/rst_ps7_0_50M/U0'
+Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0_board.xdc] for cell 'design_1_i/clk_wiz/inst'
+Finished Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0_board.xdc] for cell 'design_1_i/clk_wiz/inst'
+Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0.xdc] for cell 'design_1_i/clk_wiz/inst'
+INFO: [Timing 38-35] Done setting XDC timing constraints. [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0.xdc:57]
+INFO: [Timing 38-2] Deriving generated clocks [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0.xdc:57]
+get_clocks: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1333.754 ; gain = 577.734
+Finished Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0.xdc] for cell 'design_1_i/clk_wiz/inst'
+Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_clk_wiz_100M_0/design_1_rst_clk_wiz_100M_0_board.xdc] for cell 'design_1_i/rst_clk_wiz_100M/U0'
+Finished Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_clk_wiz_100M_0/design_1_rst_clk_wiz_100M_0_board.xdc] for cell 'design_1_i/rst_clk_wiz_100M/U0'
+Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_clk_wiz_100M_0/design_1_rst_clk_wiz_100M_0.xdc] for cell 'design_1_i/rst_clk_wiz_100M/U0'
+Finished Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_clk_wiz_100M_0/design_1_rst_clk_wiz_100M_0.xdc] for cell 'design_1_i/rst_clk_wiz_100M/U0'
 Parsing XDC File [C:/Users/behaje/Documents/zybo_z7 ble2.xdc]
 WARNING: [Vivado 12-584] No ports matched 'sys_clk'. [C:/Users/behaje/Documents/zybo_z7 ble2.xdc:8]
 CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/behaje/Documents/zybo_z7 ble2.xdc:8]
@@ -66,12 +66,9 @@ WARNING: [Vivado 12-584] No ports matched 'sys_clk'. [C:/Users/behaje/Documents/
 CRITICAL WARNING: [Vivado 12-4739] create_clock:No valid object(s) found for '-objects [get_ports sys_clk]'. [C:/Users/behaje/Documents/zybo_z7 ble2.xdc:9]
 Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
 WARNING: [Vivado 12-584] No ports matched ']'. [C:/Users/behaje/Documents/zybo_z7 ble2.xdc:104]
-WARNING: [Vivado 12-584] No ports matched 'sys_clock_out'. [C:/Users/behaje/Documents/zybo_z7 ble2.xdc:115]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/behaje/Documents/zybo_z7 ble2.xdc:115]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
 Finished Parsing XDC File [C:/Users/behaje/Documents/zybo_z7 ble2.xdc]
-Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_auto_cc_0/design_1_auto_cc_0_clocks.xdc] for cell 'design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst'
-Finished Parsing XDC File [c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_auto_cc_0/design_1_auto_cc_0_clocks.xdc] for cell 'design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst'
+Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_auto_cc_0/design_1_auto_cc_0_clocks.xdc] for cell 'design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst'
+Finished Parsing XDC File [c:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_auto_cc_0/design_1_auto_cc_0_clocks.xdc] for cell 'design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst'
 Sourcing Tcl File [C:/Xilinx/Vivado/2019.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_async_rst.tcl] for cell 'design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gnsckt_wrst.gic_rst.rst_rd_reg2_inst'
 Finished Sourcing Tcl File [C:/Xilinx/Vivado/2019.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_async_rst.tcl] for cell 'design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gnsckt_wrst.gic_rst.rst_rd_reg2_inst'
 Sourcing Tcl File [C:/Xilinx/Vivado/2019.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_async_rst.tcl] for cell 'design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwrch2.axi_wrch/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gnsckt_wrst.gic_rst.rst_rd_reg2_inst'
@@ -139,15 +136,15 @@ Finished Sourcing Tcl File [C:/Xilinx/Vivado/2019.1/data/ip/xpm/xpm_cdc/tcl/xpm_
 Sourcing Tcl File [C:/Xilinx/Vivado/2019.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gnsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd'
 Finished Sourcing Tcl File [C:/Xilinx/Vivado/2019.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gnsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd'
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1330.750 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1333.754 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 52 instances were transformed.
   IOBUF => IOBUF (IBUF, OBUFT): 8 instances
   RAM32M => RAM32M (RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMS32, RAMS32): 44 instances
 
-20 Infos, 4 Warnings, 3 Critical Warnings and 0 Errors encountered.
+20 Infos, 3 Warnings, 2 Critical Warnings and 0 Errors encountered.
 link_design completed successfully
-link_design: Time (s): cpu = 00:00:15 ; elapsed = 00:00:26 . Memory (MB): peak = 1330.750 ; gain = 1001.230
+link_design: Time (s): cpu = 00:00:16 ; elapsed = 00:00:20 . Memory (MB): peak = 1333.754 ; gain = 1003.098
 Command: opt_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
@@ -158,56 +155,56 @@ INFO: [DRC 23-27] Running DRC with 2 threads
 INFO: [Project 1-461] DRC finished with 0 Errors
 INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.580 . Memory (MB): peak = 1330.750 ; gain = 0.000
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.589 . Memory (MB): peak = 1333.754 ; gain = 0.000
 
 Starting Cache Timing Information Task
 INFO: [Timing 38-35] Done setting XDC timing constraints.
-Ending Cache Timing Information Task | Checksum: 1b84ce29b
+Ending Cache Timing Information Task | Checksum: 1931fcd4a
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.149 . Memory (MB): peak = 1330.750 ; gain = 0.000
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.154 . Memory (MB): peak = 1333.754 ; gain = 0.000
 
 Starting Logic Optimization Task
 
 Phase 1 Retarget
 INFO: [Opt 31-138] Pushed 1 inverter(s) to 1 load pin(s).
 INFO: [Opt 31-49] Retargeted 0 cell(s).
-Phase 1 Retarget | Checksum: 1133f24ac
+Phase 1 Retarget | Checksum: 12668db04
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.233 . Memory (MB): peak = 1433.906 ; gain = 0.105
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.256 . Memory (MB): peak = 1434.555 ; gain = 0.004
 INFO: [Opt 31-389] Phase Retarget created 44 cells and removed 97 cells
 INFO: [Opt 31-1021] In phase Retarget, 7 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
 
 Phase 2 Constant propagation
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Phase 2 Constant propagation | Checksum: 1133f24ac
+Phase 2 Constant propagation | Checksum: 12668db04
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.264 . Memory (MB): peak = 1433.906 ; gain = 0.105
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.287 . Memory (MB): peak = 1434.555 ; gain = 0.004
 INFO: [Opt 31-389] Phase Constant propagation created 0 cells and removed 0 cells
 
 Phase 3 Sweep
-Phase 3 Sweep | Checksum: 70eca665
+Phase 3 Sweep | Checksum: f78d67e7
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.838 . Memory (MB): peak = 1433.906 ; gain = 0.105
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.881 . Memory (MB): peak = 1434.555 ; gain = 0.004
 INFO: [Opt 31-389] Phase Sweep created 0 cells and removed 392 cells
 INFO: [Opt 31-1021] In phase Sweep, 120 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
 
 Phase 4 BUFG optimization
-Phase 4 BUFG optimization | Checksum: 70eca665
+Phase 4 BUFG optimization | Checksum: f78d67e7
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.913 . Memory (MB): peak = 1433.906 ; gain = 0.105
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.956 . Memory (MB): peak = 1434.555 ; gain = 0.004
 INFO: [Opt 31-662] Phase BUFG optimization created 0 cells of which 0 are BUFGs and removed 0 cells.
 
 Phase 5 Shift Register Optimization
 INFO: [Opt 31-1064] SRL Remap converted 0 SRLs to 0 registers and converted 0 registers of register chains to 0 SRLs
-Phase 5 Shift Register Optimization | Checksum: 70eca665
+Phase 5 Shift Register Optimization | Checksum: f78d67e7
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.967 . Memory (MB): peak = 1433.906 ; gain = 0.105
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1434.555 ; gain = 0.004
 INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
 
 Phase 6 Post Processing Netlist
-Phase 6 Post Processing Netlist | Checksum: d0341e6c
+Phase 6 Post Processing Netlist | Checksum: 4cf60a91
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1433.906 ; gain = 0.105
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1434.555 ; gain = 0.004
 INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 1 cells
 INFO: [Opt 31-1021] In phase Post Processing Netlist, 15 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
 Opt_design Change Summary
@@ -229,43 +226,43 @@ Opt_design Change Summary
 
 Starting Connectivity Check Task
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1433.906 ; gain = 0.000
-Ending Logic Optimization Task | Checksum: f6d68797
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1434.555 ; gain = 0.000
+Ending Logic Optimization Task | Checksum: 17e9a35dd
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1433.906 ; gain = 0.105
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1434.555 ; gain = 0.004
 
 Starting Power Optimization Task
 INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
-Ending Power Optimization Task | Checksum: f6d68797
+Ending Power Optimization Task | Checksum: 17e9a35dd
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.012 . Memory (MB): peak = 1433.906 ; gain = 0.000
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.016 . Memory (MB): peak = 1434.555 ; gain = 0.000
 
 Starting Final Cleanup Task
-Ending Final Cleanup Task | Checksum: f6d68797
+Ending Final Cleanup Task | Checksum: 17e9a35dd
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1433.906 ; gain = 0.000
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1434.555 ; gain = 0.000
 
 Starting Netlist Obfuscation Task
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1433.906 ; gain = 0.000
-Ending Netlist Obfuscation Task | Checksum: f6d68797
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1434.555 ; gain = 0.000
+Ending Netlist Obfuscation Task | Checksum: 17e9a35dd
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1433.906 ; gain = 0.000
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1434.555 ; gain = 0.000
 INFO: [Common 17-83] Releasing license: Implementation
-40 Infos, 4 Warnings, 3 Critical Warnings and 0 Errors encountered.
+40 Infos, 3 Warnings, 2 Critical Warnings and 0 Errors encountered.
 opt_design completed successfully
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1433.906 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1434.555 ; gain = 0.000
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.105 . Memory (MB): peak = 1433.906 ; gain = 0.000
-INFO: [Common 17-1381] The checkpoint 'C:/Users/behaje/bluetooth_ble2/bluetooth_ble2.runs/impl_1/design_1_wrapper_opt.dcp' has been generated.
+Write XDEF Complete: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.055 . Memory (MB): peak = 1434.555 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.runs/impl_1/design_1_wrapper_opt.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_drc -file design_1_wrapper_drc_opted.rpt -pb design_1_wrapper_drc_opted.pb -rpx design_1_wrapper_drc_opted.rpx
 Command: report_drc -file design_1_wrapper_drc_opted.rpt -pb design_1_wrapper_drc_opted.pb -rpx design_1_wrapper_drc_opted.rpx
 INFO: [IP_Flow 19-1839] IP Catalog is up to date.
 INFO: [DRC 23-27] Running DRC with 2 threads
-INFO: [Coretcl 2-168] The results of DRC are in file C:/Users/behaje/bluetooth_ble2/bluetooth_ble2.runs/impl_1/design_1_wrapper_drc_opted.rpt.
+INFO: [Coretcl 2-168] The results of DRC are in file C:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.runs/impl_1/design_1_wrapper_drc_opted.rpt.
 report_drc completed successfully
 Command: place_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
@@ -284,37 +281,37 @@ INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 
 Phase 1 Placer Initialization
 
 Phase 1.1 Placer Initialization Netlist Sorting
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1433.906 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1434.555 ; gain = 0.000
 Phase 1.1 Placer Initialization Netlist Sorting | Checksum: daba25c4
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 1433.906 ; gain = 0.000
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1433.906 ; gain = 0.000
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.014 . Memory (MB): peak = 1434.555 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1434.555 ; gain = 0.000
 
 Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: a19c585c
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1464.668 ; gain = 30.762
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1469.805 ; gain = 35.250
 
 Phase 1.3 Build Placer Netlist Model
 Phase 1.3 Build Placer Netlist Model | Checksum: 761c95c5
 
-Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1484.809 ; gain = 50.902
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1486.988 ; gain = 52.434
 
 Phase 1.4 Constrain Clocks/Macros
 Phase 1.4 Constrain Clocks/Macros | Checksum: 761c95c5
 
-Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1484.809 ; gain = 50.902
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1486.988 ; gain = 52.434
 Phase 1 Placer Initialization | Checksum: 761c95c5
 
-Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1484.809 ; gain = 50.902
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1486.988 ; gain = 52.434
 
 Phase 2 Global Placement
 
 Phase 2.1 Floorplanning
 Phase 2.1 Floorplanning | Checksum: 13e1a1fff
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 1484.809 ; gain = 50.902
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1486.988 ; gain = 52.434
 
 Phase 2.2 Global Placement Core
 
@@ -327,7 +324,7 @@ INFO: [Physopt 32-670] No setup violation found.  Shift Register Optimization wa
 INFO: [Physopt 32-670] No setup violation found.  BRAM Register Optimization was not performed.
 INFO: [Physopt 32-949] No candidate nets found for HD net replication
 INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1484.809 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1486.988 ; gain = 0.000
 
 Summary of Physical Synthesis Optimizations
 ============================================
@@ -347,53 +344,53 @@ Summary of Physical Synthesis Optimizations
 
 Phase 2.2.1 Physical Synthesis In Placer | Checksum: 14df2d52b
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:04 . Memory (MB): peak = 1484.809 ; gain = 50.902
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:04 . Memory (MB): peak = 1486.988 ; gain = 52.434
 Phase 2.2 Global Placement Core | Checksum: ce3f1b0d
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:04 . Memory (MB): peak = 1484.809 ; gain = 50.902
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:04 . Memory (MB): peak = 1486.988 ; gain = 52.434
 Phase 2 Global Placement | Checksum: ce3f1b0d
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:04 . Memory (MB): peak = 1484.809 ; gain = 50.902
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:04 . Memory (MB): peak = 1486.988 ; gain = 52.434
 
 Phase 3 Detail Placement
 
 Phase 3.1 Commit Multi Column Macros
 Phase 3.1 Commit Multi Column Macros | Checksum: ceb5507f
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:04 . Memory (MB): peak = 1484.809 ; gain = 50.902
+Time (s): cpu = 00:00:07 ; elapsed = 00:00:04 . Memory (MB): peak = 1486.988 ; gain = 52.434
 
 Phase 3.2 Commit Most Macros & LUTRAMs
 Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: d89cd845
 
-Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1484.809 ; gain = 50.902
+Time (s): cpu = 00:00:07 ; elapsed = 00:00:04 . Memory (MB): peak = 1486.988 ; gain = 52.434
 
 Phase 3.3 Area Swap Optimization
 Phase 3.3 Area Swap Optimization | Checksum: 105c5963f
 
-Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1484.809 ; gain = 50.902
+Time (s): cpu = 00:00:07 ; elapsed = 00:00:05 . Memory (MB): peak = 1486.988 ; gain = 52.434
 
 Phase 3.4 Pipeline Register Optimization
 Phase 3.4 Pipeline Register Optimization | Checksum: f70e4fca
 
-Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1484.809 ; gain = 50.902
+Time (s): cpu = 00:00:07 ; elapsed = 00:00:05 . Memory (MB): peak = 1486.988 ; gain = 52.434
 
 Phase 3.5 Small Shape Detail Placement
 Phase 3.5 Small Shape Detail Placement | Checksum: 186ad41fd
 
-Time (s): cpu = 00:00:08 ; elapsed = 00:00:05 . Memory (MB): peak = 1484.809 ; gain = 50.902
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:05 . Memory (MB): peak = 1486.988 ; gain = 52.434
 
 Phase 3.6 Re-assign LUT pins
 Phase 3.6 Re-assign LUT pins | Checksum: 1a18a6047
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:05 . Memory (MB): peak = 1484.809 ; gain = 50.902
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:05 . Memory (MB): peak = 1486.988 ; gain = 52.434
 
 Phase 3.7 Pipeline Register Optimization
 Phase 3.7 Pipeline Register Optimization | Checksum: 14f807c8e
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:05 . Memory (MB): peak = 1484.809 ; gain = 50.902
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:05 . Memory (MB): peak = 1486.988 ; gain = 52.434
 Phase 3 Detail Placement | Checksum: 14f807c8e
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:05 . Memory (MB): peak = 1484.809 ; gain = 50.902
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:05 . Memory (MB): peak = 1486.988 ; gain = 52.434
 
 Phase 4 Post Placement Optimization and Clean-Up
 
@@ -407,53 +404,53 @@ Phase 4.1.1.1 BUFG Insertion
 INFO: [Place 46-56] BUFG insertion identified 0 candidate nets. Inserted BUFG: 0, Replicated BUFG Driver: 0, Skipped due to Placement/Routing Conflicts: 0, Skipped due to Timing Degradation: 0, Skipped due to Illegal Netlist: 0.
 Phase 4.1.1.1 BUFG Insertion | Checksum: 177dbe500
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 1495.723 ; gain = 61.816
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 1495.793 ; gain = 61.238
 INFO: [Place 30-746] Post Placement Timing Summary WNS=3.555. For the most accurate timing information please run report_timing.
 Phase 4.1.1 Post Placement Optimization | Checksum: 17e173df1
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 1495.723 ; gain = 61.816
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 1495.793 ; gain = 61.238
 Phase 4.1 Post Commit Optimization | Checksum: 17e173df1
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 1495.723 ; gain = 61.816
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 1495.793 ; gain = 61.238
 
 Phase 4.2 Post Placement Cleanup
 Phase 4.2 Post Placement Cleanup | Checksum: 17e173df1
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 1495.723 ; gain = 61.816
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 1495.793 ; gain = 61.238
 
 Phase 4.3 Placer Reporting
 Phase 4.3 Placer Reporting | Checksum: 17e173df1
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 1495.723 ; gain = 61.816
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 1495.793 ; gain = 61.238
 
 Phase 4.4 Final Placement Cleanup
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1495.723 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1495.793 ; gain = 0.000
 Phase 4.4 Final Placement Cleanup | Checksum: 1eb91fa12
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 1495.723 ; gain = 61.816
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 1495.793 ; gain = 61.238
 Phase 4 Post Placement Optimization and Clean-Up | Checksum: 1eb91fa12
 
-Time (s): cpu = 00:00:10 ; elapsed = 00:00:06 . Memory (MB): peak = 1495.723 ; gain = 61.816
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 1495.793 ; gain = 61.238
 Ending Placer Task | Checksum: 1d08d710f
 
-Time (s): cpu = 00:00:10 ; elapsed = 00:00:06 . Memory (MB): peak = 1495.723 ; gain = 61.816
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 1495.793 ; gain = 61.238
 INFO: [Common 17-83] Releasing license: Implementation
-67 Infos, 4 Warnings, 3 Critical Warnings and 0 Errors encountered.
+67 Infos, 3 Warnings, 2 Critical Warnings and 0 Errors encountered.
 place_design completed successfully
-place_design: Time (s): cpu = 00:00:12 ; elapsed = 00:00:07 . Memory (MB): peak = 1495.723 ; gain = 61.816
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1495.723 ; gain = 0.000
+place_design: Time (s): cpu = 00:00:11 ; elapsed = 00:00:07 . Memory (MB): peak = 1495.793 ; gain = 61.238
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1495.793 ; gain = 0.000
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.387 . Memory (MB): peak = 1496.730 ; gain = 1.008
-INFO: [Common 17-1381] The checkpoint 'C:/Users/behaje/bluetooth_ble2/bluetooth_ble2.runs/impl_1/design_1_wrapper_placed.dcp' has been generated.
+Write XDEF Complete: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.226 . Memory (MB): peak = 1496.840 ; gain = 1.047
+INFO: [Common 17-1381] The checkpoint 'C:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.runs/impl_1/design_1_wrapper_placed.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_io -file design_1_wrapper_io_placed.rpt
-report_io: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.048 . Memory (MB): peak = 1496.730 ; gain = 0.000
+report_io: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.046 . Memory (MB): peak = 1496.840 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_utilization -file design_1_wrapper_utilization_placed.rpt -pb design_1_wrapper_utilization_placed.pb
 INFO: [runtcl-4] Executing : report_control_sets -verbose -file design_1_wrapper_control_sets_placed.rpt
-report_control_sets: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.082 . Memory (MB): peak = 1496.730 ; gain = 0.000
+report_control_sets: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.080 . Memory (MB): peak = 1496.840 ; gain = 0.000
 Command: route_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
@@ -470,7 +467,7 @@ Checksum: PlaceDB: db497904 ConstDB: 0 ShapeSum: f543f80b RouteDB: 0
 Phase 1 Build RT Design
 Phase 1 Build RT Design | Checksum: c0f0eaba
 
-Time (s): cpu = 00:00:22 ; elapsed = 00:00:19 . Memory (MB): peak = 1614.875 ; gain = 106.109
+Time (s): cpu = 00:00:21 ; elapsed = 00:00:19 . Memory (MB): peak = 1608.781 ; gain = 100.938
 Post Restoration Checksum: NetGraph: ab8ee4a5 NumContArr: 15620615 Constraints: 0 Timing: 0
 
 Phase 2 Router Initialization
@@ -478,23 +475,23 @@ Phase 2 Router Initialization
 Phase 2.1 Create Timer
 Phase 2.1 Create Timer | Checksum: c0f0eaba
 
-Time (s): cpu = 00:00:22 ; elapsed = 00:00:19 . Memory (MB): peak = 1647.203 ; gain = 138.438
+Time (s): cpu = 00:00:21 ; elapsed = 00:00:19 . Memory (MB): peak = 1641.074 ; gain = 133.230
 
 Phase 2.2 Fix Topology Constraints
 Phase 2.2 Fix Topology Constraints | Checksum: c0f0eaba
 
-Time (s): cpu = 00:00:22 ; elapsed = 00:00:19 . Memory (MB): peak = 1654.582 ; gain = 145.816
+Time (s): cpu = 00:00:21 ; elapsed = 00:00:19 . Memory (MB): peak = 1648.562 ; gain = 140.719
 
 Phase 2.3 Pre Route Cleanup
 Phase 2.3 Pre Route Cleanup | Checksum: c0f0eaba
 
-Time (s): cpu = 00:00:22 ; elapsed = 00:00:19 . Memory (MB): peak = 1654.582 ; gain = 145.816
+Time (s): cpu = 00:00:21 ; elapsed = 00:00:19 . Memory (MB): peak = 1648.562 ; gain = 140.719
  Number of Nodes with overlaps = 0
 
 Phase 2.4 Update Timing
 Phase 2.4 Update Timing | Checksum: 12325f8a4
 
-Time (s): cpu = 00:00:24 ; elapsed = 00:00:20 . Memory (MB): peak = 1677.387 ; gain = 168.621
+Time (s): cpu = 00:00:22 ; elapsed = 00:00:20 . Memory (MB): peak = 1672.086 ; gain = 164.242
 INFO: [Route 35-416] Intermediate Timing Summary | WNS=3.489  | TNS=0.000  | WHS=-0.205 | THS=-88.315|
 
 
@@ -503,15 +500,15 @@ Phase 2.5 Update Timing for Bus Skew
 Phase 2.5.1 Update Timing
 Phase 2.5.1 Update Timing | Checksum: 1bc86bd33
 
-Time (s): cpu = 00:00:24 ; elapsed = 00:00:21 . Memory (MB): peak = 1677.387 ; gain = 168.621
+Time (s): cpu = 00:00:23 ; elapsed = 00:00:20 . Memory (MB): peak = 1672.086 ; gain = 164.242
 INFO: [Route 35-416] Intermediate Timing Summary | WNS=3.489  | TNS=0.000  | WHS=N/A    | THS=N/A    |
 
 Phase 2.5 Update Timing for Bus Skew | Checksum: 158541fc8
 
-Time (s): cpu = 00:00:24 ; elapsed = 00:00:21 . Memory (MB): peak = 1685.418 ; gain = 176.652
+Time (s): cpu = 00:00:23 ; elapsed = 00:00:20 . Memory (MB): peak = 1679.988 ; gain = 172.145
 Phase 2 Router Initialization | Checksum: e8d723e6
 
-Time (s): cpu = 00:00:24 ; elapsed = 00:00:21 . Memory (MB): peak = 1685.418 ; gain = 176.652
+Time (s): cpu = 00:00:23 ; elapsed = 00:00:20 . Memory (MB): peak = 1679.988 ; gain = 172.145
 
 Router Utilization Summary
   Global Vertical Routing Utilization    = 0 %
@@ -529,7 +526,7 @@ Router Utilization Summary
 Phase 3 Initial Routing
 Phase 3 Initial Routing | Checksum: adbada31
 
-Time (s): cpu = 00:00:25 ; elapsed = 00:00:21 . Memory (MB): peak = 1685.418 ; gain = 176.652
+Time (s): cpu = 00:00:23 ; elapsed = 00:00:21 . Memory (MB): peak = 1679.988 ; gain = 172.145
 
 Phase 4 Rip-up And Reroute
 
@@ -541,7 +538,7 @@ INFO: [Route 35-416] Intermediate Timing Summary | WNS=3.428  | TNS=0.000  | WHS
 
 Phase 4.1 Global Iteration 0 | Checksum: 140239dbc
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:22 . Memory (MB): peak = 1685.418 ; gain = 176.652
+Time (s): cpu = 00:00:24 ; elapsed = 00:00:21 . Memory (MB): peak = 1679.988 ; gain = 172.145
 
 Phase 4.2 Global Iteration 1
  Number of Nodes with overlaps = 0
@@ -549,7 +546,7 @@ INFO: [Route 35-416] Intermediate Timing Summary | WNS=3.428  | TNS=0.000  | WHS
 
 Phase 4.2 Global Iteration 1 | Checksum: 8ab89212
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:22 . Memory (MB): peak = 1685.418 ; gain = 176.652
+Time (s): cpu = 00:00:24 ; elapsed = 00:00:21 . Memory (MB): peak = 1679.988 ; gain = 172.145
 
 Phase 4.3 Global Iteration 2
  Number of Nodes with overlaps = 1
@@ -558,25 +555,25 @@ INFO: [Route 35-416] Intermediate Timing Summary | WNS=3.428  | TNS=0.000  | WHS
 
 Phase 4.3 Global Iteration 2 | Checksum: 11a3e4672
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:22 . Memory (MB): peak = 1685.418 ; gain = 176.652
+Time (s): cpu = 00:00:24 ; elapsed = 00:00:21 . Memory (MB): peak = 1679.988 ; gain = 172.145
 Phase 4 Rip-up And Reroute | Checksum: 11a3e4672
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:22 . Memory (MB): peak = 1685.418 ; gain = 176.652
+Time (s): cpu = 00:00:24 ; elapsed = 00:00:21 . Memory (MB): peak = 1679.988 ; gain = 172.145
 
 Phase 5 Delay and Skew Optimization
 
 Phase 5.1 Delay CleanUp
 Phase 5.1 Delay CleanUp | Checksum: 11a3e4672
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:22 . Memory (MB): peak = 1685.418 ; gain = 176.652
+Time (s): cpu = 00:00:24 ; elapsed = 00:00:21 . Memory (MB): peak = 1679.988 ; gain = 172.145
 
 Phase 5.2 Clock Skew Optimization
 Phase 5.2 Clock Skew Optimization | Checksum: 11a3e4672
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:22 . Memory (MB): peak = 1685.418 ; gain = 176.652
+Time (s): cpu = 00:00:24 ; elapsed = 00:00:21 . Memory (MB): peak = 1679.988 ; gain = 172.145
 Phase 5 Delay and Skew Optimization | Checksum: 11a3e4672
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:22 . Memory (MB): peak = 1685.418 ; gain = 176.652
+Time (s): cpu = 00:00:24 ; elapsed = 00:00:21 . Memory (MB): peak = 1679.988 ; gain = 172.145
 
 Phase 6 Post Hold Fix
 
@@ -585,15 +582,15 @@ Phase 6.1 Hold Fix Iter
 Phase 6.1.1 Update Timing
 Phase 6.1.1 Update Timing | Checksum: 1c9c545a1
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:22 . Memory (MB): peak = 1685.418 ; gain = 176.652
+Time (s): cpu = 00:00:24 ; elapsed = 00:00:21 . Memory (MB): peak = 1679.988 ; gain = 172.145
 INFO: [Route 35-416] Intermediate Timing Summary | WNS=3.543  | TNS=0.000  | WHS=0.021  | THS=0.000  |
 
 Phase 6.1 Hold Fix Iter | Checksum: 1e6b18895
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:22 . Memory (MB): peak = 1685.418 ; gain = 176.652
+Time (s): cpu = 00:00:24 ; elapsed = 00:00:21 . Memory (MB): peak = 1679.988 ; gain = 172.145
 Phase 6 Post Hold Fix | Checksum: 1e6b18895
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:22 . Memory (MB): peak = 1685.418 ; gain = 176.652
+Time (s): cpu = 00:00:24 ; elapsed = 00:00:21 . Memory (MB): peak = 1679.988 ; gain = 172.145
 
 Phase 7 Route finalize
 
@@ -611,19 +608,19 @@ Router Utilization Summary
 
 Phase 7 Route finalize | Checksum: 1387d2b34
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:22 . Memory (MB): peak = 1685.418 ; gain = 176.652
+Time (s): cpu = 00:00:24 ; elapsed = 00:00:21 . Memory (MB): peak = 1679.988 ; gain = 172.145
 
 Phase 8 Verifying routed nets
 
  Verification completed successfully
 Phase 8 Verifying routed nets | Checksum: 1387d2b34
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:22 . Memory (MB): peak = 1685.418 ; gain = 176.652
+Time (s): cpu = 00:00:24 ; elapsed = 00:00:21 . Memory (MB): peak = 1679.988 ; gain = 172.145
 
 Phase 9 Depositing Routes
 Phase 9 Depositing Routes | Checksum: 211bbf40e
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:22 . Memory (MB): peak = 1685.418 ; gain = 176.652
+Time (s): cpu = 00:00:25 ; elapsed = 00:00:22 . Memory (MB): peak = 1679.988 ; gain = 172.145
 
 Phase 10 Post Router Timing
 INFO: [Route 35-57] Estimated Timing Summary | WNS=3.543  | TNS=0.000  | WHS=0.021  | THS=0.000  |
@@ -631,35 +628,35 @@ INFO: [Route 35-57] Estimated Timing Summary | WNS=3.543  | TNS=0.000  | WHS=0.0
 INFO: [Route 35-327] The final timing numbers are based on the router estimated timing analysis. For a complete and accurate timing signoff, please run report_timing_summary.
 Phase 10 Post Router Timing | Checksum: 211bbf40e
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:22 . Memory (MB): peak = 1685.418 ; gain = 176.652
+Time (s): cpu = 00:00:25 ; elapsed = 00:00:22 . Memory (MB): peak = 1679.988 ; gain = 172.145
 INFO: [Route 35-16] Router Completed Successfully
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:22 . Memory (MB): peak = 1685.418 ; gain = 176.652
+Time (s): cpu = 00:00:25 ; elapsed = 00:00:22 . Memory (MB): peak = 1679.988 ; gain = 172.145
 
 Routing Is Done.
 INFO: [Common 17-83] Releasing license: Implementation
-87 Infos, 4 Warnings, 3 Critical Warnings and 0 Errors encountered.
+87 Infos, 3 Warnings, 2 Critical Warnings and 0 Errors encountered.
 route_design completed successfully
-route_design: Time (s): cpu = 00:00:28 ; elapsed = 00:00:23 . Memory (MB): peak = 1685.418 ; gain = 188.688
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1685.418 ; gain = 0.000
+route_design: Time (s): cpu = 00:00:27 ; elapsed = 00:00:23 . Memory (MB): peak = 1679.988 ; gain = 183.148
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1679.988 ; gain = 0.000
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.461 . Memory (MB): peak = 1685.941 ; gain = 0.523
-INFO: [Common 17-1381] The checkpoint 'C:/Users/behaje/bluetooth_ble2/bluetooth_ble2.runs/impl_1/design_1_wrapper_routed.dcp' has been generated.
+Write XDEF Complete: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.276 . Memory (MB): peak = 1680.434 ; gain = 0.445
+INFO: [Common 17-1381] The checkpoint 'C:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.runs/impl_1/design_1_wrapper_routed.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_drc -file design_1_wrapper_drc_routed.rpt -pb design_1_wrapper_drc_routed.pb -rpx design_1_wrapper_drc_routed.rpx
 Command: report_drc -file design_1_wrapper_drc_routed.rpt -pb design_1_wrapper_drc_routed.pb -rpx design_1_wrapper_drc_routed.rpx
 INFO: [IP_Flow 19-1839] IP Catalog is up to date.
 INFO: [DRC 23-27] Running DRC with 2 threads
-INFO: [Coretcl 2-168] The results of DRC are in file C:/Users/behaje/bluetooth_ble2/bluetooth_ble2.runs/impl_1/design_1_wrapper_drc_routed.rpt.
+INFO: [Coretcl 2-168] The results of DRC are in file C:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.runs/impl_1/design_1_wrapper_drc_routed.rpt.
 report_drc completed successfully
 INFO: [runtcl-4] Executing : report_methodology -file design_1_wrapper_methodology_drc_routed.rpt -pb design_1_wrapper_methodology_drc_routed.pb -rpx design_1_wrapper_methodology_drc_routed.rpx
 Command: report_methodology -file design_1_wrapper_methodology_drc_routed.rpt -pb design_1_wrapper_methodology_drc_routed.pb -rpx design_1_wrapper_methodology_drc_routed.rpx
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 INFO: [DRC 23-133] Running Methodology with 2 threads
-INFO: [Coretcl 2-1520] The results of Report Methodology are in file C:/Users/behaje/bluetooth_ble2/bluetooth_ble2.runs/impl_1/design_1_wrapper_methodology_drc_routed.rpt.
+INFO: [Coretcl 2-1520] The results of Report Methodology are in file C:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.runs/impl_1/design_1_wrapper_methodology_drc_routed.rpt.
 report_methodology completed successfully
 INFO: [runtcl-4] Executing : report_power -file design_1_wrapper_power_routed.rpt -pb design_1_wrapper_power_summary_routed.pb -rpx design_1_wrapper_power_routed.rpx
 Command: report_power -file design_1_wrapper_power_routed.rpt -pb design_1_wrapper_power_summary_routed.pb -rpx design_1_wrapper_power_routed.rpx
@@ -667,7 +664,7 @@ INFO: [Timing 38-35] Done setting XDC timing constraints.
 Running Vector-less Activity Propagation...
 
 Finished Running Vector-less Activity Propagation
-99 Infos, 4 Warnings, 3 Critical Warnings and 0 Errors encountered.
+99 Infos, 3 Warnings, 2 Critical Warnings and 0 Errors encountered.
 report_power completed successfully
 INFO: [runtcl-4] Executing : report_route_status -file design_1_wrapper_route_status.rpt -pb design_1_wrapper_route_status.pb
 INFO: [runtcl-4] Executing : report_timing_summary -max_paths 10 -file design_1_wrapper_timing_summary_routed.rpt -pb design_1_wrapper_timing_summary_routed.pb -rpx design_1_wrapper_timing_summary_routed.rpx -warn_on_violation 
@@ -687,7 +684,7 @@ Running DRC as a precondition to command write_bitstream
 INFO: [IP_Flow 19-1839] IP Catalog is up to date.
 INFO: [DRC 23-27] Running DRC with 2 threads
 WARNING: [DRC BUFC-1] Input Buffer Connections: Input buffer ja_pin2_iobuf/IBUF has no loads. It is recommended to have an input buffer drive an internal load.
-WARNING: [DRC RTSTAT-10] No routable loads: 15 net(s) have no routable loads. The problem bus(es) and/or net(s) are design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwrch2.axi_wrch/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwdch2.axi_wdch/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwach2.axi_wach/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grach2.axi_rach/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwrch2.axi_wrch/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwdch2.axi_wdch/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwach2.axi_wach/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grach2.axi_rach/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwrch2.axi_wrch/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/user_valid, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwdch2.axi_wdch/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/user_valid, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwach2.axi_wach/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/user_valid, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grach2.axi_rach/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/user_valid, and design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/user_valid.
+WARNING: [DRC RTSTAT-10] No routable loads: 15 net(s) have no routable loads. The problem bus(es) and/or net(s) are design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwrch2.axi_wrch/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwdch2.axi_wdch/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwach2.axi_wach/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grach2.axi_rach/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwrch2.axi_wrch/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwdch2.axi_wdch/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwach2.axi_wach/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grach2.axi_rach/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwrch2.axi_wrch/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/user_valid, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwdch2.axi_wdch/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/user_valid, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gwrite_ch.gwach2.axi_wach/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/user_valid, design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/user_valid, and design_1_i/ps7_0_axi_periph/s00_couplers/auto_cc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grach2.axi_rach/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/user_valid.
 INFO: [Vivado 12-3199] DRC finished with 0 Errors, 2 Warnings
 INFO: [Vivado 12-3200] Please refer to the DRC report (report_drc) for more information.
 INFO: [Designutils 20-2272] Running write_bitstream with 2 threads.
@@ -700,7 +697,7 @@ Creating bitstream...
 Writing bitstream ./design_1_wrapper.bit...
 INFO: [Vivado 12-1842] Bitgen Completed Successfully.
 INFO: [Common 17-83] Releasing license: Implementation
-117 Infos, 7 Warnings, 3 Critical Warnings and 0 Errors encountered.
+117 Infos, 6 Warnings, 2 Critical Warnings and 0 Errors encountered.
 write_bitstream completed successfully
-write_bitstream: Time (s): cpu = 00:00:14 ; elapsed = 00:00:12 . Memory (MB): peak = 2141.977 ; gain = 431.578
-INFO: [Common 17-206] Exiting Vivado at Tue Sep 27 22:03:44 2022...
+write_bitstream: Time (s): cpu = 00:00:13 ; elapsed = 00:00:12 . Memory (MB): peak = 2146.824 ; gain = 443.457
+INFO: [Common 17-206] Exiting Vivado at Tue Oct 25 13:13:38 2022...

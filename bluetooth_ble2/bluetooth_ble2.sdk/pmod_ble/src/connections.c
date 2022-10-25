@@ -1,0 +1,13 @@
+#include "connections.h"
+
+
+int createConnection(PmodBLE* InstancePtr, u32 GPIO_Address, u32 UART_Address, u32 AXI_ClockFreq, u32 Uart_Baud){
+	BLE_Begin(InstancePtr, GPIO_Address, UART_Address, AXI_ClockFreq, Uart_Baud);
+	return BLE_IsConnected(InstancePtr);
+}
+
+// not really needed, there doesn't appear to be a connection reset function for PmodBLE.c
+//bool breakConnection(PmodBLE* InstancePtr) {
+//
+//	return !BLE_IsConnected(InstancePtr);
+//}

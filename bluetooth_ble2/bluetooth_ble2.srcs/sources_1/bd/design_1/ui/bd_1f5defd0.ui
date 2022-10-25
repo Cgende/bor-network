@@ -5,30 +5,30 @@
 preplace port DDR -pg 1 -lvl 5 -x 1260 -y 60 -defaultsOSRD
 preplace port FIXED_IO -pg 1 -lvl 5 -x 1260 -y 80 -defaultsOSRD
 preplace port ja -pg 1 -lvl 5 -x 1260 -y 380 -defaultsOSRD
-preplace port sys_clock -pg 1 -lvl 0 -x -40 -y 590 -defaultsOSRD
-preplace port reset_rtl -pg 1 -lvl 0 -x -40 -y 530 -defaultsOSRD
-preplace inst PmodBLE_0 -pg 1 -lvl 4 -x 1090 -y 390 -defaultsOSRD
+preplace port sys_clock -pg 1 -lvl 0 -x -50 -y 590 -defaultsOSRD
+preplace port reset_rtl -pg 1 -lvl 0 -x -50 -y 530 -defaultsOSRD
 preplace inst clk_wiz -pg 1 -lvl 1 -x 80 -y 580 -defaultsOSRD
 preplace inst processing_system7_0 -pg 1 -lvl 2 -x 380 -y 110 -defaultsOSRD
 preplace inst ps7_0_axi_periph -pg 1 -lvl 3 -x 770 -y 370 -defaultsOSRD
 preplace inst rst_clk_wiz_100M -pg 1 -lvl 2 -x 380 -y 530 -defaultsOSRD
 preplace inst rst_ps7_0_50M -pg 1 -lvl 2 -x 380 -y 330 -defaultsOSRD
+preplace inst PmodBLE_0 -pg 1 -lvl 4 -x 1090 -y 390 -defaultsOSRD
 preplace netloc processing_system7_0_FCLK_CLK0 1 1 2 180 220 590
-preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 3 -10 310 170 230 580
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 3 -20 310 170 230 580
 preplace netloc rst_ps7_0_50M_peripheral_aresetn 1 2 1 N 370
 preplace netloc clk_wiz_clk_out1 1 1 3 170 430 620 230 920J
 preplace netloc clk_wiz_locked 1 1 1 180 570n
 preplace netloc rst_clk_wiz_100M_peripheral_aresetn 1 2 2 600 220 930J
 preplace netloc sys_clock_1 1 0 1 NJ 590
-preplace netloc reset_rtl_0_1 1 0 2 -20J 510 NJ
+preplace netloc reset_rtl_0_1 1 0 2 -30J 510 NJ
 preplace netloc ps7_0_axi_periph_M00_AXI 1 3 1 N 360
 preplace netloc processing_system7_0_DDR 1 2 3 NJ 60 NJ 60 NJ
-preplace netloc processing_system7_0_M_AXI_GP0 1 2 1 610 120n
-preplace netloc ps7_0_axi_periph_M01_AXI 1 3 1 N 380
 preplace netloc PmodBLE_0_Pmod_out 1 4 1 NJ 380
+preplace netloc ps7_0_axi_periph_M01_AXI 1 3 1 N 380
+preplace netloc processing_system7_0_M_AXI_GP0 1 2 1 610 120n
 preplace netloc processing_system7_0_FIXED_IO 1 2 3 NJ 80 NJ 80 NJ
-levelinfo -pg 1 -40 80 380 770 1090 1260
-pagesize -pg 1 -db -bbox -sgen -160 0 1380 920
+levelinfo -pg 1 -50 80 380 770 1090 1260
+pagesize -pg 1 -db -bbox -sgen -170 0 1380 920
 "
 }
 {
