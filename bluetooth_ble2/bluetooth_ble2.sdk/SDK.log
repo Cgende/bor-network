@@ -584,3 +584,7 @@ con
 13:14:16 INFO  : SDK has detected change in the last modified timestamps for source hardware specification file Source:1666718018098,  Project:1664330624961
 13:14:16 INFO  : The hardware specification for project 'design_1_wrapper_hw_platform_1' is different from C:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.sdk/design_1_wrapper.hdf.
 13:14:16 INFO  : Copied contents of C:/Users/behaje/Documents/bor_network/bluetooth_ble2/bluetooth_ble2.sdk/design_1_wrapper.hdf into \design_1_wrapper_hw_platform_1\system.hdf.
+13:14:19 INFO  : Synchronizing projects in the workspace with the hardware platform specification changes.
+13:14:19 INFO  : Clearing existing target manager status.
+13:14:19 INFO  : Workspace synchronized with the new hardware specification file. Cleaning dependent projects...
+13:14:19 WARN  : Linker script will not be updated automatically. Users need to update it manually.

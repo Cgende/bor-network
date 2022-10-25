@@ -691,3 +691,60 @@ arm-none-eabi-size pmod_ble.elf  |tee "pmod_ble.elf.size"
   74120	   2600	  23488	 100208	  18770	pmod_ble.elf
 'Finished building: pmod_ble.elf.size'
 ' '
+13:18:25 **** Auto Build of configuration Debug for project pmod_ble ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/test.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/test.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../pmod_ble_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/test.d" -MT"src/test.o" -o "src/test.o" "../src/test.c"
+../src/test.c:284:12: warning: 'test_decrypt_ecb' defined but not used [-Wunused-function]
+ static int test_decrypt_ecb(void)
+            ^~~~~~~~~~~~~~~~
+../src/test.c:234:12: warning: 'test_decrypt_ctr' defined but not used [-Wunused-function]
+ static int test_decrypt_ctr(void)
+            ^~~~~~~~~~~~~~~~
+../src/test.c:229:12: warning: 'test_encrypt_ctr' defined but not used [-Wunused-function]
+ static int test_encrypt_ctr(void)
+            ^~~~~~~~~~~~~~~~
+../src/test.c:185:12: warning: 'test_encrypt_cbc' defined but not used [-Wunused-function]
+ static int test_encrypt_cbc(void)
+            ^~~~~~~~~~~~~~~~
+../src/test.c:140:12: warning: 'test_decrypt_cbc' defined but not used [-Wunused-function]
+ static int test_decrypt_cbc(void)
+            ^~~~~~~~~~~~~~~~
+../src/test.c:108:12: warning: 'test_encrypt_ecb' defined but not used [-Wunused-function]
+ static int test_encrypt_ecb(void)
+            ^~~~~~~~~~~~~~~~
+../src/test.c:66:13: warning: 'test_encrypt_ecb_verbose' defined but not used [-Wunused-function]
+ static void test_encrypt_ecb_verbose(void)
+             ^~~~~~~~~~~~~~~~~~~~~~~~
+'Finished building: ../src/test.c'
+' '
+'Building target: pmod_ble.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../pmod_ble_bsp/ps7_cortexa9_0/lib -o "pmod_ble.elf"  ./src/aes.o ./src/connections.o ./src/helloworld.o ./src/main.o ./src/platform.o ./src/test.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+c:/xilinx/sdk/2019.1/gnu/aarch32/nt/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.2.0/../../../../arm-none-eabi/bin/ld.exe: ../../pmod_ble_bsp/ps7_cortexa9_0/lib\libxil.a(xil-crt0.o): in function `_start':
+C:\Users\behaje\Documents\bor_network\bluetooth_ble2\bluetooth_ble2.sdk\pmod_ble_bsp\ps7_cortexa9_0\libsrc\standalone_v7_0\src/xil-crt0.S:138: undefined reference to `main'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:41: pmod_ble.elf] Error 1
+13:18:32 **** Auto Build of configuration Debug for project pmod_ble ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../pmod_ble_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+'Finished building: ../src/main.c'
+' '
+'Building target: pmod_ble.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../pmod_ble_bsp/ps7_cortexa9_0/lib -o "pmod_ble.elf"  ./src/aes.o ./src/connections.o ./src/helloworld.o ./src/main.o ./src/platform.o ./src/test.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: pmod_ble.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size pmod_ble.elf  |tee "pmod_ble.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  73976	   2600	  23488	 100064	  186e0	pmod_ble.elf
+'Finished building: pmod_ble.elf.size'
+' '
