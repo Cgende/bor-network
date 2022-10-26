@@ -158,6 +158,7 @@ vlog -work axi_protocol_converter_v2_1_19  -v2k5 "+incdir+../../../../bluetooth_
 
 vlog -work xil_defaultlib  -v2k5 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
 "../../../bd/design_1/ip/design_1_auto_pc_0/sim/design_1_auto_pc_0.v" \
+"../../../bd/design_1/ip/design_1_PmodBLE_1_0/sim/design_1_PmodBLE_1_0.v" \
 
 vcom -work xil_defaultlib -93 \
 "../../../bd/design_1/sim/design_1.vhd" \

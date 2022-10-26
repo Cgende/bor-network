@@ -1,0 +1,15 @@
+#include <stdlib.h>
+#include <stdint.h>
+
+#include "PmodBLE.h"
+
+
+struct connection
+{
+	long long macAddr;
+	u32 outputBufferAddr;
+};
+
+
+bool createConnection(PmodBLE* InstancePtr, u32 GPIO_Address, u32 UART_Address, u32 AXI_ClockFreq, u32 Uart_Baud);
+bool breakConnection(PmodBLE* InstancePtr);

@@ -32,7 +32,7 @@
  
 /******************************************************************/
 /* Definitions for driver PMODBLE */
-#define XPAR_PMODBLE_NUM_INSTANCES 1
+#define XPAR_PMODBLE_NUM_INSTANCES 2
 
 /* Definitions for peripheral PMODBLE_0 */
 #define XPAR_PMODBLE_0_DEVICE_ID 0
@@ -40,6 +40,14 @@
 #define XPAR_PMODBLE_0_S_AXI_UART_HIGHADDR 0x43C1FFFF
 #define XPAR_PMODBLE_0_S_AXI_GPIO_BASEADDR 0x43C00000
 #define XPAR_PMODBLE_0_S_AXI_GPIO_HIGHADDR 0x43C0FFFF
+
+
+/* Definitions for peripheral PMODBLE_1 */
+#define XPAR_PMODBLE_1_DEVICE_ID 1
+#define XPAR_PMODBLE_1_S_AXI_UART_BASEADDR 0x43C30000
+#define XPAR_PMODBLE_1_S_AXI_UART_HIGHADDR 0x43C3FFFF
+#define XPAR_PMODBLE_1_S_AXI_GPIO_BASEADDR 0x43C20000
+#define XPAR_PMODBLE_1_S_AXI_GPIO_HIGHADDR 0x43C2FFFF
 
 
 /******************************************************************/

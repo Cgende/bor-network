@@ -40,7 +40,8 @@ typedef XUartPs SysUart;
 #define BLE_UART_AXI_CLOCK_FREQ 100000000
 #endif
 
-PmodBLE myDevice;
+PmodBLE pmod_device_0;
+PmodBLE pmod_device_1;
 SysUart myUart;
 
 void DemoInitialize();
@@ -62,12 +63,19 @@ void DemoInitialize()
     EnableCaches();
     SysUartInit();
     BLE_Begin (
-        &myDevice,
+        &pmod_device_0,
         XPAR_PMODBLE_0_S_AXI_GPIO_BASEADDR,
         XPAR_PMODBLE_0_S_AXI_UART_BASEADDR,
         BLE_UART_AXI_CLOCK_FREQ,
         115200
     );
+    BLE_Begin (
+            &pmod_device_1,
+            XPAR_PMODBLE_1_S_AXI_GPIO_BASEADDR,
+            XPAR_PMODBLE_1_S_AXI_UART_BASEADDR,
+            BLE_UART_AXI_CLOCK_FREQ,
+            115200
+        );
 }
 
 void DemoRun()
@@ -80,15 +88,21 @@ void DemoRun()
     while(1) {
         //echo all characters received from both BLE and terminal to terminal
         //forward all characters received from terminal to BLE
-        n = SysUart_Recv(&myUart, buf, 1);
-        if (n != 0) {
-            SysUart_Send(&myUart, buf, 1);
-            BLE_SendData(&myDevice, buf, 1);
-        }
+//        n = SysUart_Recv(&myUart, buf, 1);
+//        if (n != 0) {
+//            SysUart_Send(&myUart, buf, 1);
+//            BLE_SendData(&myDevice, buf, 1);
+//        }
 
-        n = BLE_RecvData(&myDevice, buf, 1);
+    	// forward data between devices
+    	n = BLE_RecvData(&pmod_device_0, buf, 1);
+		if (n != 0) {
+			BLE_SendData(&pmod_device_1, buf, 1);
+		}
+
+        n = BLE_RecvData(&pmod_device_1, buf, 1);
         if (n != 0) {
-            SysUart_Send(&myUart, buf, 1);
+        	BLE_SendData(&pmod_device_0, buf, 1);
         }
     }
 }
