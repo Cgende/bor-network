@@ -64,7 +64,6 @@ class _MyPageThreeState extends State<Messaging> {
 
   late final Stream<List<int>> _readStream = flutterReactiveBle.subscribeToCharacteristic(_readCharacteristic);
 
-
   @override
   void initState() {
     super.initState();
@@ -92,8 +91,11 @@ class _MyPageThreeState extends State<Messaging> {
       }
       //  Subscribe to read  ble-----------------------------------------------------
       _readStream.listen(
-            (List<int> data) {
+        (List<int> data) {
           print(utf8.decode(data));
+          setState(() {
+            message.add(Message(messageContent: utf8.decode(data), messageType: "receiver"));
+          });
         },
         onError: (Object e) async {
           debugPrint(e.toString());
