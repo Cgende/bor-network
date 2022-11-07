@@ -65,7 +65,7 @@ class _MyPageTwoState extends State<DeviceList> {
                   },
                   style: ElevatedButton.styleFrom(
                       textStyle: const TextStyle(
-                          fontSize: 48, fontWeight: FontWeight.bold),
+                          fontSize: 44, fontWeight: FontWeight.bold),
                       backgroundColor: Colors.red,
                       shadowColor: Colors.red,
                       foregroundColor: Colors.black,

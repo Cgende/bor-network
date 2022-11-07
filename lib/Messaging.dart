@@ -1,8 +1,12 @@
 import 'dart:convert';
-
+import 'dart:io' show Platform;
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:hello_world/DeviceList.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
+
+import 'package:starflut/starflut.dart';
+import 'package:win_ble/win_ble.dart';
 
 class Message {
   String messageContent;
@@ -28,14 +32,7 @@ class _MyPageThreeState extends State<Messaging> {
   final TextEditingController _textEditingController = TextEditingController();
   bool _needsScroll = false;
 
-  //List<Message> message = [];
-  List<Message> message = [
-    Message(messageContent: "Hello, Will", messageType: "receiver"),
-    Message(messageContent: "How have you been?", messageType: "receiver"),
-    Message(messageContent: "Hey Kriss, I am doing fine dude. wbu?", messageType: "sender"),
-    Message(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
-    Message(messageContent: "Is there any thing wrong?", messageType: "sender"),
-  ];
+  List<Message> message = [];
 
   _scrollToEnd() async {
     if (_needsScroll) {
@@ -64,44 +61,86 @@ class _MyPageThreeState extends State<Messaging> {
 
   late final Stream<List<int>> _readStream = flutterReactiveBle.subscribeToCharacteristic(_readCharacteristic);
 
+  connect(String address) async {
+    await WinBle.connect(address);
+  }
+
+  pair(String address) async {
+    await WinBle.pair(address);
+  }
+
+  subscribeToCharacteristic(address, serviceID, charID) async {
+    await WinBle.subscribeToCharacteristic(
+        address: address, serviceId: serviceID, characteristicId: charID);
+  }
+
+  readCharacteristic(address, serviceID, charID) async {
+    List<int> data = await WinBle.read(
+        address: address, serviceId: serviceID, characteristicId: charID);
+    setState(() {
+      message.add(Message(
+          messageContent: String.fromCharCodes(data), messageType: "receiver"));
+    });
+  }
+
+  writeCharacteristic(String address, serviceID, charID,
+      Uint8List data, bool writeWithResponse) async {
+    await WinBle.write(
+        address: address,
+        service: serviceID,
+        characteristic: charID,
+        data: data,
+        writeWithResponse: writeWithResponse);
+  }
+
   @override
   void initState() {
     super.initState();
-    //  Connect to ble-----------------------------------------------------
-    flutterReactiveBle.statusStream.listen((status) async {
-      debugPrint("BLE STATUS: ${status.toString()}");
-      if (status == BleStatus.ready) {
-        flutterReactiveBle
-            .connectToDevice(
-          // id: "94:B8:6D:F0:BB:48", //WINDOWS
-          // id: "98:E0:D9:A2:34:A0", // MAC
-          id: "60:8A:10:53:CE:9B", // FPGA
-          connectionTimeout: const Duration(seconds: 15),
-        )
-            .listen((connectionState) {
-          print("CONNECTION STATE UPDATE: $connectionState");
+    if (Platform.isWindows){
+      WinBle.initialize();
+      connect("60:8a:10:53:ce:9b");
+      //pair("5c:f3:70:a1:7e:8d");
+      subscribeToCharacteristic("60:8a:10:53:ce:9b", '49535343-FE7D-4AE5-8FA9-9FAFD205E455', "49535343-1E4D-4BD9-BA61-23C647249616");
+      readCharacteristic("60:8a:10:53:ce:9b", '49535343-FE7D-4AE5-8FA9-9FAFD205E455', "49535343-1E4D-4BD9-BA61-23C647249616");
+    }
+    else {
+      //  Connect to ble-----------------------------------------------------
+      flutterReactiveBle.statusStream.listen((status) async {
+        debugPrint("BLE STATUS: ${status.toString()}");
+        if (status == BleStatus.ready) {
+          flutterReactiveBle
+              .connectToDevice(
+            // id: "94:B8:6D:F0:BB:48", //WINDOWS
+            // id: "98:E0:D9:A2:34:A0", // MAC
+            id: "60:8A:10:53:CE:9B", // FPGA
+            connectionTimeout: const Duration(seconds: 15),
+          )
+              .listen((connectionState) {
+            print("CONNECTION STATE UPDATE: $connectionState");
 
-          // Handle connection state updates
-        }, onError: (Object error) {
-          print("ERROR: $error");
-          // Handle a possible error
-        });
-
-        //todo handle statuses
-      }
-      //  Subscribe to read  ble-----------------------------------------------------
-      _readStream.listen(
-        (List<int> data) {
-          print(utf8.decode(data));
-          setState(() {
-            message.add(Message(messageContent: utf8.decode(data), messageType: "receiver"));
+            // Handle connection state updates
+          }, onError: (Object error) {
+            print("ERROR: $error");
+            // Handle a possible error
           });
-        },
-        onError: (Object e) async {
-          debugPrint(e.toString());
-        },
-      );
-    });
+
+          //todo handle statuses
+        }
+        //  Subscribe to read  ble-----------------------------------------------------
+        _readStream.listen(
+              (List<int> data) {
+            print(utf8.decode(data));
+            setState(() {
+              message.add(Message(
+                  messageContent: utf8.decode(data), messageType: "receiver"));
+            });
+          },
+          onError: (Object e) async {
+            debugPrint(e.toString());
+          },
+        );
+      });
+    }
   }
 
   @override
@@ -153,12 +192,19 @@ class _MyPageThreeState extends State<Messaging> {
                   message.add(Message(messageContent: str, messageType: "sender"));
                   _needsScroll = true;
 
-                  () async {
-                    await flutterReactiveBle.writeCharacteristicWithResponse(
-                      _writeCharacteristic,
-                      value: const AsciiCodec().encode(str),
-                    );
-                  }.call();
+                  if (Platform.isWindows){
+                    final List<int> codeUnits = str.codeUnits;
+                    final Uint8List unit8List = Uint8List.fromList(codeUnits);
+                    writeCharacteristic("60:8a:10:53:ce:9b", '49535343-FE7D-4AE5-8FA9-9FAFD205E455', "49535343-8841-43F4-A8D4-ECBE34729BB3", unit8List, true);
+                  }
+                  else {
+                        () async {
+                      await flutterReactiveBle.writeCharacteristicWithResponse(
+                        _writeCharacteristic,
+                        value: const AsciiCodec().encode(str),
+                      );
+                    }.call();
+                  }
                 });
                 _textEditingController.clear();
               },
