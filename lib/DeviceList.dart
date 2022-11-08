@@ -1,9 +1,13 @@
+import 'dart:async';
+import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:hello_world/Messaging.dart';
+import 'package:win_ble/win_ble.dart';
 
 class Device{
   String name;
   Device({required this.name});
+
 }
 
 class DeviceList extends StatefulWidget {
@@ -14,11 +18,53 @@ class DeviceList extends StatefulWidget {
 
 class _MyPageTwoState extends State<DeviceList> {
   List<Device> device = [Device(name: "Device 1"), Device(name: "Device 2")];
+  StreamSubscription? scanStream;
+  StreamSubscription? connectionStream;
+  StreamSubscription? bleStateStream;
+  BleState bleState = BleState.Unknown;
+
+  connect(String address) async {
+    await WinBle.connect(address);
+  }
+
+  disconnect(address) async {
+    await WinBle.disconnect(address);
+  }
+
+  pair(String address) async {
+    await WinBle.pair(address);
+  }
+
+  subscribeToCharacteristic(address, serviceID, charID) async {
+    await WinBle.subscribeToCharacteristic(
+        address: address, serviceId: serviceID, characteristicId: charID);
+  }
+
 
   @override
-  void initState(){
+  void dispose() {
+    scanStream?.cancel();
+    connectionStream?.cancel();
+    bleStateStream?.cancel();
+    disconnect("60:8a:10:53:ce:9b");
+    super.dispose();
+  }
+
+  @override
+  void initState() {
     super.initState();
-    device.add(Device(name: "Device 3"));
+    if (Platform.isWindows) {
+      scanStream = WinBle.scanStream.listen((event) {
+        setState(() {
+          var contain = device.where((element) => element.name == event.address);
+          if (contain.isEmpty) {
+            if (event.address == "60:8a:10:53:ce:9b") {
+              device.add(Device(name: event.address));
+            }
+          }
+        });
+      });
+    }
   }
 
   @override
@@ -42,6 +88,8 @@ class _MyPageTwoState extends State<DeviceList> {
                     itemBuilder: (BuildContext context, int index) {
                       return OutlinedButton(
                         onPressed: () {
+                          WinBle.stopScanning();
+                          connect("60:8a:10:53:ce:9b");
                           Navigator.push(
                               context,
                               MaterialPageRoute(

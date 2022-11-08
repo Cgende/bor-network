@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io' show Platform;
 import 'dart:typed_data';
@@ -61,17 +62,8 @@ class _MyPageThreeState extends State<Messaging> {
 
   late final Stream<List<int>> _readStream = flutterReactiveBle.subscribeToCharacteristic(_readCharacteristic);
 
-  connect(String address) async {
-    await WinBle.connect(address);
-  }
-
-  pair(String address) async {
-    await WinBle.pair(address);
-  }
-
-  subscribeToCharacteristic(address, serviceID, charID) async {
-    await WinBle.subscribeToCharacteristic(
-        address: address, serviceId: serviceID, characteristicId: charID);
+  disconnect(address) async {
+    await WinBle.disconnect(address);
   }
 
   readCharacteristic(address, serviceID, charID) async {
@@ -79,7 +71,7 @@ class _MyPageThreeState extends State<Messaging> {
         address: address, serviceId: serviceID, characteristicId: charID);
     setState(() {
       message.add(Message(
-          messageContent: String.fromCharCodes(data), messageType: "receiver"));
+          messageContent: utf8.decode(data), messageType: "receiver"));
     });
   }
 
@@ -96,14 +88,11 @@ class _MyPageThreeState extends State<Messaging> {
   @override
   void initState() {
     super.initState();
-    if (Platform.isWindows){
-      WinBle.initialize();
-      connect("60:8a:10:53:ce:9b");
-      //pair("5c:f3:70:a1:7e:8d");
-      subscribeToCharacteristic("60:8a:10:53:ce:9b", '49535343-FE7D-4AE5-8FA9-9FAFD205E455', "49535343-1E4D-4BD9-BA61-23C647249616");
-      readCharacteristic("60:8a:10:53:ce:9b", '49535343-FE7D-4AE5-8FA9-9FAFD205E455', "49535343-1E4D-4BD9-BA61-23C647249616");
-    }
-    else {
+
+      //subscribeToCharacteristic("60:8a:10:53:ce:9b", '49535343-FE7D-4AE5-8FA9-9FAFD205E455', "49535343-1E4D-4BD9-BA61-23C647249616");
+      //readCharacteristic("60:8a:10:53:ce:9b", '49535343-FE7D-4AE5-8FA9-9FAFD205E455', "49535343-1E4D-4BD9-BA61-23C647249616");
+
+    if (Platform.isAndroid) {
       //  Connect to ble-----------------------------------------------------
       flutterReactiveBle.statusStream.listen((status) async {
         debugPrint("BLE STATUS: ${status.toString()}");
@@ -153,6 +142,9 @@ class _MyPageThreeState extends State<Messaging> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
+            if (Platform.isWindows){
+              disconnect("60:8a:10:53:ce:9b");
+            }
             Navigator.pop(context);
           },
         ),
@@ -193,9 +185,7 @@ class _MyPageThreeState extends State<Messaging> {
                   _needsScroll = true;
 
                   if (Platform.isWindows){
-                    final List<int> codeUnits = str.codeUnits;
-                    final Uint8List unit8List = Uint8List.fromList(codeUnits);
-                    writeCharacteristic("60:8a:10:53:ce:9b", '49535343-FE7D-4AE5-8FA9-9FAFD205E455', "49535343-8841-43F4-A8D4-ECBE34729BB3", unit8List, true);
+                    writeCharacteristic("60:8a:10:53:ce:9b", '49535343-FE7D-4AE5-8FA9-9FAFD205E455', "49535343-8841-43F4-A8D4-ECBE34729BB3", const AsciiCodec().encode(str), true);
                   }
                   else {
                         () async {

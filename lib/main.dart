@@ -4,11 +4,12 @@ import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:core';
-
+import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:hello_world/DeviceList.dart';
+import 'package:win_ble/win_ble.dart';
 
 void main() {
   runApp(const MyApp());
@@ -47,49 +48,67 @@ class _MyHomePageState extends State<MyHomePage> {
   final flutterReactiveBle = FlutterReactiveBle();
   List discoveredDevices = [];
 
+  StreamSubscription? scanStream;
+  StreamSubscription? connectionStream;
+  StreamSubscription? bleStateStream;
+  BleState bleState = BleState.Unknown;
+
   StreamController<List> discoveredDevicesStreamController = StreamController();
 
   @override
   void initState() {
     super.initState();
 
-    //  BLE
-    flutterReactiveBle.statusStream.listen((status) async {
-      debugPrint("BLE STATUS: ${status.toString()}");
+    if (Platform.isWindows) {
+      WinBle.initialize(enableLog: true);
+      connectionStream = WinBle.connectionStream.listen((event) {
+        print("Connection Event : " + event.toString());
+      });
 
-      if (status == BleStatus.ready) {
-        flutterReactiveBle.scanForDevices(
-            scanMode: ScanMode.lowLatency, withServices: []).listen((device) {
-          if (!discoveredDevices.any((element) => element.id == device.id)) {
-            discoveredDevices.add(device);
-            discoveredDevicesStreamController.add(discoveredDevices);
-            print(discoveredDevices.length);
-          }
-
-          //code for handling results
-        }, onError: (error) {
-          //code for handling error
+      bleStateStream = WinBle.bleState.listen((BleState state) {
+        setState(() {
+          bleState = state;
         });
+      });
+    }
+    else {
+      //  BLE
+      flutterReactiveBle.statusStream.listen((status) async {
+        debugPrint("BLE STATUS: ${status.toString()}");
 
-        // while(true) {
-        //   flutterReactiveBle.connectToDevice(
-        //     // id: "94:B8:6D:F0:BB:48", //WINDOWS
-        //     id: "98:E0:D9:A2:34:A0", // MAC
-        //     connectionTimeout: const Duration(seconds: 15),
-        //   ).listen((connectionState) {
-        //     print("CONNECTION STATE UPDATE: $connectionState");
-        //
-        //     // Handle connection state updates
-        //   }, onError: (Object error) {
-        //     print("ERROR: $error");
-        //     // Handle a possible error
-        //   });
-        //
-        //   await Future.delayed(Duration(seconds: 15));
-        // }
-      }
-      //todo handle statuses
-    });
+        if (status == BleStatus.ready) {
+          flutterReactiveBle.scanForDevices(
+              scanMode: ScanMode.lowLatency, withServices: []).listen((device) {
+            if (!discoveredDevices.any((element) => element.id == device.id)) {
+              discoveredDevices.add(device);
+              discoveredDevicesStreamController.add(discoveredDevices);
+              print(discoveredDevices.length);
+            }
+
+            //code for handling results
+          }, onError: (error) {
+            //code for handling error
+          });
+
+          // while(true) {
+          //   flutterReactiveBle.connectToDevice(
+          //     // id: "94:B8:6D:F0:BB:48", //WINDOWS
+          //     id: "98:E0:D9:A2:34:A0", // MAC
+          //     connectionTimeout: const Duration(seconds: 15),
+          //   ).listen((connectionState) {
+          //     print("CONNECTION STATE UPDATE: $connectionState");
+          //
+          //     // Handle connection state updates
+          //   }, onError: (Object error) {
+          //     print("ERROR: $error");
+          //     // Handle a possible error
+          //   });
+          //
+          //   await Future.delayed(Duration(seconds: 15));
+          // }
+        }
+        //todo handle statuses
+      });
 
 // // BLUETOOTH CLASSIC
 //
@@ -117,6 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
 //         print('Cannot connect, exception occured');
 //       }
 //     }.call();
+    }
   }
 
   final List<String> entries = <String>['A', 'B', 'C'];
@@ -179,6 +199,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   alignment: Alignment.center,
                   child: ElevatedButton(
                     onPressed: () {
+                      WinBle.startScanning();
                       Navigator.push(
                           context,
                           MaterialPageRoute(
