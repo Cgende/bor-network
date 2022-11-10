@@ -1,4 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
+import 'dart:math';
+import 'package:encrypt/encrypt.dart' as enc;
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:hello_world/DeviceList.dart';
@@ -12,18 +17,19 @@ class Message {
 }
 
 class Messaging extends StatefulWidget {
-  Device device;
+  final Device device;
 
-  Messaging({required this.device});
+  const Messaging({super.key, required this.device});
 
   @override
-  State createState() => new _MyPageThreeState(device: device);
+  State createState() => _MyPageThreeState();
 }
 
 class _MyPageThreeState extends State<Messaging> {
-  _MyPageThreeState({required this.device});
+  _MyPageThreeState();
 
-  Device device;
+  late Device device = widget.device;
+  BorNode borNode = BorNode();
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textEditingController = TextEditingController();
   bool _needsScroll = false;
@@ -86,14 +92,16 @@ class _MyPageThreeState extends State<Messaging> {
           print("ERROR: $error");
           // Handle a possible error
         });
-
         //todo handle statuses
       }
       //  Subscribe to read  ble-----------------------------------------------------
       _readStream.listen(
-        (List<int> data) {
+            (List<int> data) {
           print(utf8.decode(data));
           setState(() {
+            // todo parse message header
+            //
+
             message.add(Message(messageContent: utf8.decode(data), messageType: "receiver"));
           });
         },
@@ -153,10 +161,11 @@ class _MyPageThreeState extends State<Messaging> {
                   message.add(Message(messageContent: str, messageType: "sender"));
                   _needsScroll = true;
 
-                  () async {
+                      () async {
+                    // Todo encrypt message
                     await flutterReactiveBle.writeCharacteristicWithResponse(
                       _writeCharacteristic,
-                      value: const AsciiCodec().encode(str),
+                      value: const AsciiCodec().encode(borNode.encrypt(str)),
                     );
                   }.call();
                 });
@@ -165,10 +174,10 @@ class _MyPageThreeState extends State<Messaging> {
               style: const TextStyle(color: Colors.white),
               cursorColor: Colors.white,
               decoration: const InputDecoration(
-                  // suffixIcon: IconButton(
-                  //   icon: Icon(Icons.send),
-                  //   onPressed: (),
-                  // ),
+                // suffixIcon: IconButton(
+                //   icon: Icon(Icons.send),
+                //   onPressed: (),
+                // ),
                   contentPadding: EdgeInsets.all(20),
                   hintText: "Type message here...",
                   hintStyle: TextStyle(color: Colors.white),
@@ -179,4 +188,106 @@ class _MyPageThreeState extends State<Messaging> {
       ),
     );
   }
+}
+
+class BorNode {
+  late List<BigInt> keys;
+
+  final BigInt _secretInt = BigInt.from(Random.secure().nextInt(1000)); // todo Inclusive?
+  final BigInt _modulus = BigInt.parse('12398128031892309812390123908123089128309812390'); // todo Pick or genarate this
+  final BigInt _base = BigInt.from(69); // todo Pick or generate this
+
+  Future<bool> distributeKeys() async {
+    BigInt publicInt = _base.modPow(_secretInt, _modulus);
+    // todo send public int a
+    // todo receive int b
+    BigInt receivedInt = BigInt.from(Random.secure().nextInt(1000));
+    BigInt secretKey = receivedInt.modPow(_secretInt, _modulus);
+    keys.add(secretKey);
+    aesTest(secretKey);
+    return true;
+  }
+
+  String encrypt(String message) {
+    final _key = enc.Key.fromUtf8(keys[0].toString());
+    final iv = enc.IV.fromLength(16);
+    final encrypter = enc.Encrypter(enc.AES(_key));
+    final encrypted = encrypter.encrypt(message, iv: iv);
+    return encrypted.toString();
+  }
+
+  String decrypt(String message) {
+    final _key = enc.Key.fromUtf8(keys[0].toString());
+    final iv = enc.IV.fromLength(16);
+    final encrypter = enc.Encrypter(enc.AES(_key));
+    enc.Encrypted test = enc.Encrypted.fromUtf8(message);
+    final decrypted = encrypter.decrypt(test, iv: iv);
+    return decrypted.toString();
+  }
+
+  void aesTest(BigInt key) {
+    const plainText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit';
+    final _key = enc.Key.fromUtf8(key.toString());
+    final iv = enc.IV.fromLength(16);
+
+    final encrypter = enc.Encrypter(enc.AES(_key));
+
+    final encrypted = encrypter.encrypt(plainText, iv: iv);
+    final decrypted = encrypter.decrypt(encrypted, iv: iv);
+
+    print(decrypted); // Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    print(encrypted.base64); // R4PxiU3h8YoIRqVowBXm36ZcCeNeZ4s1OvVBTfFlZRdmohQqOpPQqD1YecJeZMAop/hZ4OxqgC1WtwvX/hP9mw==
+  }
+
+  void handleMessage(String message) {
+    // Get the bits of the header, ie character 0, as a list of ints with a fancy list comprehension
+    List<int> headerBits = [
+      for (var bit in utf8.encode(message)[0].toRadixString(2).padLeft(8, '0').split(''))
+        int.parse(bit)
+    ];
+    if (headerBits.sublist(0, 3) == [1, 0]) {
+      // First Packet
+      print(1);
+    }
+    if (headerBits.sublist(0, 3) == [0, 0]) {
+      // Middle Packet
+      print(2);
+    }
+    if (headerBits.sublist(0, 3) == [0, 1]) {
+      // Last Packet
+      print(3);
+    }
+    if (headerBits.sublist(3, 7) == [0, 1]) {
+      // Last Packet
+      print(4);
+    }
+
+    // If its one for diffie helman, do the approriate stuff
+    // otherwise, just decrypt and show on screen.
+  }
+
+// Central/Manager bluetooth device sets and transmits modulus and base
+//
+// Peripheral receives modulus and base
+//
+// Decide on my_secret_int
+//
+// my_public_int = (base) ** my_secret_int % modulus
+//
+// transmit my_public_int
+// receive  their_public_int
+//
+// key = their_public_int ** my_secret_int % modulus
+//
+// key is now known by both parties
+
+// public Future<bool> send(String message, String macAddress)
+// Encrypt the message three times, using the three distributed keys
+// Try to send the message to the mac address with the flutter_reactive_ble package.
+// wait up to 100ms.
+// If not successful, return a future that completes to false, otherwise return a future which completes to true,
+// public String receive(BluetoothConnection device)
+// grab the most recent message out of the device's received stream.
+// return an empty string if there are no messages, otherwise decrypt and return the message
+
 }
