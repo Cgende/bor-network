@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
-| Date         : Tue Oct 25 14:25:34 2022
+| Date         : Fri Nov 11 15:05:50 2022
 | Host         : CB195-UL-41 running 64-bit major release  (build 9200)
 | Command      : report_utilization -file design_1_wrapper_utilization_synth.rpt -pb design_1_wrapper_utilization_synth.pb
 | Design       : design_1_wrapper
@@ -30,13 +30,13 @@ Table of Contents
 +----------------------------+------+-------+-----------+-------+
 |          Site Type         | Used | Fixed | Available | Util% |
 +----------------------------+------+-------+-----------+-------+
-| Slice LUTs*                | 1959 |     0 |     53200 |  3.68 |
-|   LUT as Logic             | 1678 |     0 |     53200 |  3.15 |
-|   LUT as Memory            |  281 |     0 |     17400 |  1.61 |
-|     LUT as Distributed RAM |  176 |     0 |           |       |
-|     LUT as Shift Register  |  105 |     0 |           |       |
-| Slice Registers            | 2568 |     0 |    106400 |  2.41 |
-|   Register as Flip Flop    | 2568 |     0 |    106400 |  2.41 |
+| Slice LUTs*                | 1099 |     0 |     53200 |  2.07 |
+|   LUT as Logic             | 1014 |     0 |     53200 |  1.91 |
+|   LUT as Memory            |   85 |     0 |     17400 |  0.49 |
+|     LUT as Distributed RAM |    0 |     0 |           |       |
+|     LUT as Shift Register  |   85 |     0 |           |       |
+| Slice Registers            | 1135 |     0 |    106400 |  1.07 |
+|   Register as Flip Flop    | 1135 |     0 |    106400 |  1.07 |
 |   Register as Latch        |    0 |     0 |    106400 |  0.00 |
 | F7 Muxes                   |    0 |     0 |     26600 |  0.00 |
 | F8 Muxes                   |    0 |     0 |     13300 |  0.00 |
@@ -56,10 +56,10 @@ Table of Contents
 | 0     |            _ |         Set |            - |
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
-| 110   |          Yes |           - |          Set |
-| 130   |          Yes |           - |        Reset |
-| 136   |          Yes |         Set |            - |
-| 2192  |          Yes |       Reset |            - |
+| 0     |          Yes |           - |          Set |
+| 0     |          Yes |           - |        Reset |
+| 76    |          Yes |         Set |            - |
+| 1059  |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -92,7 +92,7 @@ Table of Contents
 +-----------------------------+------+-------+-----------+--------+
 |          Site Type          | Used | Fixed | Available |  Util% |
 +-----------------------------+------+-------+-----------+--------+
-| Bonded IOB                  |   18 |     0 |       125 |  14.40 |
+| Bonded IOB                  |    8 |     0 |       125 |   6.40 |
 | Bonded IPADs                |    0 |     0 |         2 |   0.00 |
 | Bonded IOPADs               |  130 |     0 |       130 | 100.00 |
 | PHY_CONTROL                 |    0 |     0 |         4 |   0.00 |
@@ -105,8 +105,8 @@ Table of Contents
 | PHASER_IN/PHASER_IN_PHY     |    0 |     0 |        16 |   0.00 |
 | IDELAYE2/IDELAYE2_FINEDELAY |    0 |     0 |       200 |   0.00 |
 | ILOGIC                      |    0 |     0 |       125 |   0.00 |
-| OLOGIC                      |    2 |     0 |       125 |   1.60 |
-|   ODDR                      |    2 |       |           |        |
+| OLOGIC                      |    1 |     0 |       125 |   0.80 |
+|   ODDR                      |    1 |       |           |        |
 +-----------------------------+------+-------+-----------+--------+
 
 
@@ -116,9 +116,9 @@ Table of Contents
 +------------+------+-------+-----------+-------+
 |  Site Type | Used | Fixed | Available | Util% |
 +------------+------+-------+-----------+-------+
-| BUFGCTRL   |    3 |     0 |        32 |  9.38 |
+| BUFGCTRL   |    1 |     0 |        32 |  3.13 |
 | BUFIO      |    0 |     0 |        16 |  0.00 |
-| MMCME2_ADV |    1 |     0 |         4 | 25.00 |
+| MMCME2_ADV |    0 |     0 |         4 |  0.00 |
 | PLLE2_ADV  |    0 |     0 |         4 |  0.00 |
 | BUFMRCE    |    0 |     0 |         8 |  0.00 |
 | BUFHCE     |    0 |     0 |        72 |  0.00 |
@@ -146,32 +146,27 @@ Table of Contents
 7. Primitives
 -------------
 
-+------------+------+----------------------+
-|  Ref Name  | Used |  Functional Category |
-+------------+------+----------------------+
-| FDRE       | 2192 |         Flop & Latch |
-| LUT6       |  558 |                  LUT |
-| LUT3       |  399 |                  LUT |
-| LUT4       |  342 |                  LUT |
-| LUT5       |  286 |                  LUT |
-| RAMD32     |  264 |   Distributed Memory |
-| LUT2       |  220 |                  LUT |
-| LUT1       |  212 |                  LUT |
-| FDSE       |  136 |         Flop & Latch |
-| FDCE       |  130 |         Flop & Latch |
-| BIBUF      |  130 |                   IO |
-| FDPE       |  110 |         Flop & Latch |
-| RAMS32     |   88 |   Distributed Memory |
-| SRL16E     |   58 |   Distributed Memory |
-| SRLC32E    |   47 |   Distributed Memory |
-| CARRY4     |   26 |           CarryLogic |
-| IBUF       |   18 |                   IO |
-| OBUFT      |   16 |                   IO |
-| BUFG       |    3 |                Clock |
-| ODDR       |    2 |                   IO |
-| PS7        |    1 | Specialized Resource |
-| MMCME2_ADV |    1 |                Clock |
-+------------+------+----------------------+
++----------+------+----------------------+
+| Ref Name | Used |  Functional Category |
++----------+------+----------------------+
+| FDRE     | 1059 |         Flop & Latch |
+| LUT6     |  341 |                  LUT |
+| LUT3     |  306 |                  LUT |
+| LUT4     |  193 |                  LUT |
+| LUT1     |  164 |                  LUT |
+| LUT5     |  148 |                  LUT |
+| BIBUF    |  130 |                   IO |
+| LUT2     |   95 |                  LUT |
+| FDSE     |   76 |         Flop & Latch |
+| SRLC32E  |   47 |   Distributed Memory |
+| SRL16E   |   38 |   Distributed Memory |
+| CARRY4   |   22 |           CarryLogic |
+| OBUFT    |    8 |                   IO |
+| IBUF     |    8 |                   IO |
+| PS7      |    1 | Specialized Resource |
+| ODDR     |    1 |                   IO |
+| BUFG     |    1 |                Clock |
++----------+------+----------------------+
 
 
 8. Black Boxes

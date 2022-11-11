@@ -20,7 +20,6 @@ vlib questa_lib/msim/axi_register_slice_v2_1_19
 vlib questa_lib/msim/fifo_generator_v13_2_4
 vlib questa_lib/msim/axi_data_fifo_v2_1_18
 vlib questa_lib/msim/axi_crossbar_v2_1_20
-vlib questa_lib/msim/axi_clock_converter_v2_1_18
 vlib questa_lib/msim/axi_protocol_converter_v2_1_19
 
 vmap xilinx_vip questa_lib/msim/xilinx_vip
@@ -42,7 +41,6 @@ vmap axi_register_slice_v2_1_19 questa_lib/msim/axi_register_slice_v2_1_19
 vmap fifo_generator_v13_2_4 questa_lib/msim/fifo_generator_v13_2_4
 vmap axi_data_fifo_v2_1_18 questa_lib/msim/axi_data_fifo_v2_1_18
 vmap axi_crossbar_v2_1_20 questa_lib/msim/axi_crossbar_v2_1_20
-vmap axi_clock_converter_v2_1_18 questa_lib/msim/axi_clock_converter_v2_1_18
 vmap axi_protocol_converter_v2_1_19 questa_lib/msim/axi_protocol_converter_v2_1_19
 
 vlog -work xilinx_vip -64 -sv -L axi_vip_v1_1_5 -L processing_system7_vip_v1_0_7 -L xilinx_vip "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
@@ -56,7 +54,7 @@ vlog -work xilinx_vip -64 -sv -L axi_vip_v1_1_5 -L processing_system7_vip_v1_0_7
 "C:/Xilinx/Vivado/2019.1/data/xilinx_vip/hdl/clk_vip_if.sv" \
 "C:/Xilinx/Vivado/2019.1/data/xilinx_vip/hdl/rst_vip_if.sv" \
 
-vlog -work xil_defaultlib -64 -sv -L axi_vip_v1_1_5 -L processing_system7_vip_v1_0_7 -L xilinx_vip "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
+vlog -work xil_defaultlib -64 -sv -L axi_vip_v1_1_5 -L processing_system7_vip_v1_0_7 -L xilinx_vip "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
 "C:/Xilinx/Vivado/2019.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv" \
 "C:/Xilinx/Vivado/2019.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv" \
 
@@ -81,7 +79,7 @@ vcom -work axi_uart16550_v2_0_21 -64 -93 \
 vcom -work xil_defaultlib -64 -93 \
 "../../../bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_axi_uart16550_0_0/sim/PmodBLE_axi_uart16550_0_0.vhd" \
 
-vlog -work xil_defaultlib -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
+vlog -work xil_defaultlib -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
 "../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_0_0/ipshared/0a6f/src/pmod_concat.v" \
 "../../../bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_pmod_bridge_0_0/sim/PmodBLE_pmod_bridge_0_0.v" \
 
@@ -94,20 +92,20 @@ vcom -work axi_gpio_v2_0_21 -64 -93 \
 vcom -work xil_defaultlib -64 -93 \
 "../../../bd/design_1/ip/design_1_PmodBLE_0_0/src/PmodBLE_axi_gpio_0_0/sim/PmodBLE_axi_gpio_0_0.vhd" \
 
-vlog -work xil_defaultlib -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
+vlog -work xil_defaultlib -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
 "../../../bd/design_1/ipshared/e861/src/PmodBLE.v" \
 "../../../bd/design_1/ip/design_1_PmodBLE_0_0/sim/design_1_PmodBLE_0_0.v" \
 
-vlog -work axi_infrastructure_v1_1_0 -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
+vlog -work axi_infrastructure_v1_1_0 -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
 "../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl/axi_infrastructure_v1_1_vl_rfs.v" \
 
-vlog -work axi_vip_v1_1_5 -64 -sv -L axi_vip_v1_1_5 -L processing_system7_vip_v1_0_7 -L xilinx_vip "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
+vlog -work axi_vip_v1_1_5 -64 -sv -L axi_vip_v1_1_5 -L processing_system7_vip_v1_0_7 -L xilinx_vip "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
 "../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/d4a8/hdl/axi_vip_v1_1_vl_rfs.sv" \
 
-vlog -work processing_system7_vip_v1_0_7 -64 -sv -L axi_vip_v1_1_5 -L processing_system7_vip_v1_0_7 -L xilinx_vip "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
+vlog -work processing_system7_vip_v1_0_7 -64 -sv -L axi_vip_v1_1_5 -L processing_system7_vip_v1_0_7 -L xilinx_vip "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
 "../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl/processing_system7_vip_v1_0_vl_rfs.sv" \
 
-vlog -work xil_defaultlib -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
+vlog -work xil_defaultlib -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
 "../../../bd/design_1/ip/design_1_processing_system7_0_0/sim/design_1_processing_system7_0_0.v" \
 
 vcom -work proc_sys_reset_v5_0_13 -64 -93 \
@@ -116,49 +114,35 @@ vcom -work proc_sys_reset_v5_0_13 -64 -93 \
 vcom -work xil_defaultlib -64 -93 \
 "../../../bd/design_1/ip/design_1_rst_ps7_0_50M_0/sim/design_1_rst_ps7_0_50M_0.vhd" \
 
-vlog -work xil_defaultlib -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
-"../../../bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0_clk_wiz.v" \
-"../../../bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0.v" \
-
-vcom -work xil_defaultlib -64 -93 \
-"../../../bd/design_1/ip/design_1_rst_clk_wiz_100M_0/sim/design_1_rst_clk_wiz_100M_0.vhd" \
-
-vlog -work generic_baseblocks_v2_1_0 -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
+vlog -work generic_baseblocks_v2_1_0 -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
 "../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/b752/hdl/generic_baseblocks_v2_1_vl_rfs.v" \
 
-vlog -work axi_register_slice_v2_1_19 -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
+vlog -work axi_register_slice_v2_1_19 -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
 "../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/4d88/hdl/axi_register_slice_v2_1_vl_rfs.v" \
 
-vlog -work fifo_generator_v13_2_4 -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
+vlog -work fifo_generator_v13_2_4 -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
 "../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/1f5a/simulation/fifo_generator_vlog_beh.v" \
 
 vcom -work fifo_generator_v13_2_4 -64 -93 \
 "../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/1f5a/hdl/fifo_generator_v13_2_rfs.vhd" \
 
-vlog -work fifo_generator_v13_2_4 -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
+vlog -work fifo_generator_v13_2_4 -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
 "../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/1f5a/hdl/fifo_generator_v13_2_rfs.v" \
 
-vlog -work axi_data_fifo_v2_1_18 -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
+vlog -work axi_data_fifo_v2_1_18 -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
 "../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/5b9c/hdl/axi_data_fifo_v2_1_vl_rfs.v" \
 
-vlog -work axi_crossbar_v2_1_20 -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
+vlog -work axi_crossbar_v2_1_20 -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
 "../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ace7/hdl/axi_crossbar_v2_1_vl_rfs.v" \
 
-vlog -work xil_defaultlib -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
+vlog -work xil_defaultlib -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
 "../../../bd/design_1/ip/design_1_xbar_0/sim/design_1_xbar_0.v" \
 
-vlog -work axi_clock_converter_v2_1_18 -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
-"../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ac9d/hdl/axi_clock_converter_v2_1_vl_rfs.v" \
-
-vlog -work xil_defaultlib -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
-"../../../bd/design_1/ip/design_1_auto_cc_0/sim/design_1_auto_cc_0.v" \
-
-vlog -work axi_protocol_converter_v2_1_19 -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
+vlog -work axi_protocol_converter_v2_1_19 -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
 "../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c83a/hdl/axi_protocol_converter_v2_1_vl_rfs.v" \
 
-vlog -work xil_defaultlib -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/c923" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
+vlog -work xil_defaultlib -64 "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ipshared/8c62/hdl" "+incdir+../../../../bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0" "+incdir+C:/Xilinx/Vivado/2019.1/data/xilinx_vip/include" \
 "../../../bd/design_1/ip/design_1_auto_pc_0/sim/design_1_auto_pc_0.v" \
-"../../../bd/design_1/ip/design_1_PmodBLE_1_0/sim/design_1_PmodBLE_1_0.v" \
 
 vcom -work xil_defaultlib -64 -93 \
 "../../../bd/design_1/sim/design_1.vhd" \

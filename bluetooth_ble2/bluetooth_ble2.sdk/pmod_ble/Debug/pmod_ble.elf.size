@@ -1,2 +1,2 @@
    text	   data	    bss	    dec	    hex	filename
-  74040	   2600	  23568	 100208	  18770	pmod_ble.elf
+  35992	   1560	  23432	  60984	   ee38	pmod_ble.elf

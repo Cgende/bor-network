@@ -7,28 +7,22 @@ LD_SRCS += \
 ../src/lscript.ld 
 
 C_SRCS += \
-../src/aes.c \
-../src/connections.c \
 ../src/helloworld.c \
 ../src/main.c \
-../src/platform.c \
-../src/test.c 
+../src/mod_multi.c \
+../src/platform.c 
 
 OBJS += \
-./src/aes.o \
-./src/connections.o \
 ./src/helloworld.o \
 ./src/main.o \
-./src/platform.o \
-./src/test.o 
+./src/mod_multi.o \
+./src/platform.o 
 
 C_DEPS += \
-./src/aes.d \
-./src/connections.d \
 ./src/helloworld.d \
 ./src/main.d \
-./src/platform.d \
-./src/test.d 
+./src/mod_multi.d \
+./src/platform.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

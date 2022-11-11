@@ -17,7 +17,6 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
-set_param chipscope.maxJobs 3
 create_project -in_memory -part xc7z020clg400-1
 
 set_param project.singleFileAddWarning.threshold 0
@@ -30,7 +29,10 @@ set_property XPM_LIBRARIES {XPM_CDC XPM_MEMORY} [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language VHDL [current_project]
 set_property board_part digilentinc.com:zybo-z7-20:part0:1.0 [current_project]
-set_property ip_repo_paths c:/Users/behaje/Documents/bor_network/vivado-library-zmod-v1-2019.1-2 [current_project]
+set_property ip_repo_paths {
+  c:/Users/behaje/ip_repo/modular_multiplication_1.0
+  c:/Users/behaje/Documents/bor_network/vivado-library-zmod-v1-2019.1-2
+} [current_project]
 update_ip_catalog
 set_property ip_output_repo c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
@@ -49,25 +51,7 @@ set_property used_in_implementation false [get_files -all c:/Users/behaje/blueto
 set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc]
 set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_50M_0/design_1_rst_ps7_0_50M_0_board.xdc]
 set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_50M_0/design_1_rst_ps7_0_50M_0.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0_board.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0/design_1_clk_wiz_0_ooc.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_clk_wiz_100M_0/design_1_rst_clk_wiz_100M_0_board.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_rst_clk_wiz_100M_0/design_1_rst_clk_wiz_100M_0.xdc]
-set_property used_in_synthesis false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_auto_cc_0/design_1_auto_cc_0_clocks.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_auto_cc_0/design_1_auto_cc_0_clocks.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_auto_cc_0/design_1_auto_cc_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_0/design_1_auto_pc_0_ooc.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_1_0/design_1_PmodBLE_1_0_board.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_1_0/src/PmodBLE_ooc.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_1_0/src/PmodBLE_axi_uart16550_0_0/PmodBLE_axi_uart16550_0_0_board.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_1_0/src/PmodBLE_axi_uart16550_0_0/PmodBLE_axi_uart16550_0_0_ooc.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_1_0/src/PmodBLE_axi_uart16550_0_0/PmodBLE_axi_uart16550_0_0.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_1_0/src/PmodBLE_pmod_bridge_0_0/PmodBLE_pmod_bridge_0_0_board.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_1_0/src/PmodBLE_pmod_bridge_0_0/src/pmod_concat_ooc.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_1_0/src/PmodBLE_axi_gpio_0_0/PmodBLE_axi_gpio_0_0_board.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_1_0/src/PmodBLE_axi_gpio_0_0/PmodBLE_axi_gpio_0_0_ooc.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/ip/design_1_PmodBLE_1_0/src/PmodBLE_axi_gpio_0_0/PmodBLE_axi_gpio_0_0.xdc]
 set_property used_in_implementation false [get_files -all C:/Users/behaje/bluetooth_ble2/bluetooth_ble2.srcs/sources_1/bd/design_1/design_1_ooc.xdc]
 
 # Mark all dcp files as not used in implementation to prevent them from being

@@ -2,8 +2,8 @@
 # Vivado v2019.1 (64-bit)
 # SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
 # IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
-# Start of session at: Tue Oct 25 14:24:05 2022
-# Process ID: 1320
+# Start of session at: Fri Nov 11 15:04:29 2022
+# Process ID: 12064
 # Current directory: C:/Users/behaje/bluetooth_ble2/bluetooth_ble2.runs/synth_1
 # Command line: vivado.exe -log design_1_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_wrapper.tcl
 # Log file: C:/Users/behaje/bluetooth_ble2/bluetooth_ble2.runs/synth_1/design_1_wrapper.vds
