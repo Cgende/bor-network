@@ -31,23 +31,9 @@ class _MyPageTwoState extends State<DeviceList> {
     await WinBle.disconnect(address);
   }
 
-  pair(String address) async {
-    await WinBle.pair(address);
-  }
-
   subscribeToCharacteristic(address, serviceID, charID) async {
     await WinBle.subscribeToCharacteristic(
         address: address, serviceId: serviceID, characteristicId: charID);
-  }
-
-
-  @override
-  void dispose() {
-    scanStream?.cancel();
-    connectionStream?.cancel();
-    bleStateStream?.cancel();
-    disconnect("60:8a:10:53:ce:9b");
-    super.dispose();
   }
 
   @override
@@ -87,14 +73,22 @@ class _MyPageTwoState extends State<DeviceList> {
                     itemCount: device.length,
                     itemBuilder: (BuildContext context, int index) {
                       return OutlinedButton(
-                        onPressed: () {
-                          WinBle.stopScanning();
-                          connect("60:8a:10:53:ce:9b");
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Messaging(device: device[index])
-                              ));
+                        onPressed: () async {
+                          if (Platform.isWindows){
+                            WinBle.stopScanning();
+                            connect("60:8a:10:53:ce:9b");
+                            subscribeToCharacteristic("60:8a:10:53:ce:9b", '49535343-fe7d-4ae5-8fa9-9fafd205e455', "49535343-1e4d-4bd9-ba61-23c647249616");
+                            var fromMessagingScreen = await Navigator.push(context, MaterialPageRoute(builder: (context) => Messaging(device: device[index])
+                            ));
+                            if (fromMessagingScreen == true) {
+                              device.clear();
+                              WinBle.startScanning();
+                            }
+                          }
+                          else {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => Messaging(device: device[index])
+                            ));
+                          }
                         },
                         style: OutlinedButton.styleFrom(
                             textStyle: const TextStyle(fontSize: 20),
@@ -109,6 +103,10 @@ class _MyPageTwoState extends State<DeviceList> {
                 alignment: Alignment.bottomRight,
                 child: ElevatedButton(
                   onPressed: () {
+                    WinBle.stopScanning();
+                    scanStream?.cancel();
+                    connectionStream?.cancel();
+                    bleStateStream?.cancel();
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(

@@ -32,6 +32,8 @@ class _MyPageThreeState extends State<Messaging> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textEditingController = TextEditingController();
   bool _needsScroll = false;
+  bool connected = false;
+  Timer? timer;
 
   List<Message> message = [];
 
@@ -70,8 +72,10 @@ class _MyPageThreeState extends State<Messaging> {
     List<int> data = await WinBle.read(
         address: address, serviceId: serviceID, characteristicId: charID);
     setState(() {
-      message.add(Message(
-          messageContent: utf8.decode(data), messageType: "receiver"));
+      // if (!message.any((element) => element.messageContent == utf8.decode(data))) {
+        message.add(Message(
+            messageContent: utf8.decode(data), messageType: "receiver"));
+      // }
     });
   }
 
@@ -85,14 +89,36 @@ class _MyPageThreeState extends State<Messaging> {
         writeWithResponse: writeWithResponse);
   }
 
+  subscribeToCharacteristic(address, serviceID, charID) async {
+    await WinBle.subscribeToCharacteristic(
+        address: address, serviceId: serviceID, characteristicId: charID);
+  }
+
+  StreamSubscription? _connectionStream;
+  StreamSubscription? _characteristicValueStream;
+
   @override
   void initState() {
     super.initState();
+    if (Platform.isWindows){
+      _connectionStream =
+          WinBle.connectionStreamOf("60:8a:10:53:ce:9b").listen((event) {
+            setState(() {
+              connected = event;
+            });
+          });
 
-      //subscribeToCharacteristic("60:8a:10:53:ce:9b", '49535343-FE7D-4AE5-8FA9-9FAFD205E455', "49535343-1E4D-4BD9-BA61-23C647249616");
-      //readCharacteristic("60:8a:10:53:ce:9b", '49535343-FE7D-4AE5-8FA9-9FAFD205E455', "49535343-1E4D-4BD9-BA61-23C647249616");
 
-    if (Platform.isAndroid) {
+      _characteristicValueStream =
+          WinBle.characteristicValueStream.listen((event) {
+            readCharacteristic("60:8a:10:53:ce:9b", '49535343-fe7d-4ae5-8fa9-9fafd205e455', "49535343-1e4d-4bd9-ba61-23c647249616");
+            print("CharValue : $event");
+          });
+
+      //timer = Timer.periodic(Duration(seconds: 1), (Timer t) => readCharacteristic("60:8a:10:53:ce:9b", '49535343-fe7d-4ae5-8fa9-9fafd205e455', "49535343-1e4d-4bd9-ba61-23c647249616"));
+    }
+
+    else {
       //  Connect to ble-----------------------------------------------------
       flutterReactiveBle.statusStream.listen((status) async {
         debugPrint("BLE STATUS: ${status.toString()}");
@@ -143,9 +169,14 @@ class _MyPageThreeState extends State<Messaging> {
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
             if (Platform.isWindows){
+              _connectionStream?.cancel();
+              _characteristicValueStream?.cancel();
               disconnect("60:8a:10:53:ce:9b");
+              Navigator.pop(context, true);
             }
-            Navigator.pop(context);
+            else {
+              Navigator.pop(context);
+            }
           },
         ),
         centerTitle: true,
@@ -185,7 +216,7 @@ class _MyPageThreeState extends State<Messaging> {
                   _needsScroll = true;
 
                   if (Platform.isWindows){
-                    writeCharacteristic("60:8a:10:53:ce:9b", '49535343-FE7D-4AE5-8FA9-9FAFD205E455', "49535343-8841-43F4-A8D4-ECBE34729BB3", const AsciiCodec().encode(str), true);
+                    writeCharacteristic("60:8a:10:53:ce:9b", '49535343-fe7d-4ae5-8fa9-9fafd205e455', "49535343-1e4d-4bd9-ba61-23c647249616", const AsciiCodec().encode(str), true);
                   }
                   else {
                         () async {
