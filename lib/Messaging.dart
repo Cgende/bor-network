@@ -8,6 +8,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:hello_world/DeviceList.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
+import 'package:pointycastle/pointycastle.dart';
+import 'package:pointycastle/srp/srp6_util.dart';
 
 class Message {
   String messageContent;
@@ -194,7 +196,7 @@ class BorNode {
   late List<BigInt> keys;
 
   final BigInt _secretInt = BigInt.from(Random.secure().nextInt(1000)); // todo Inclusive?
-  final BigInt _modulus = BigInt.parse('12398128031892309812390123908123089128309812390'); // todo Pick or genarate this
+  late final BigInt _modulus = randomBigInt(size: 256);
   final BigInt _base = BigInt.from(69); // todo Pick or generate this
 
   Future<bool> distributeKeys() async {
@@ -266,6 +268,15 @@ class BorNode {
     // otherwise, just decrypt and show on screen.
   }
 
+  BigInt randomBigInt({required int size}) {
+    final random = Random.secure();
+    final builder = BytesBuilder();
+    for (var i = 0; i < size; ++i) {
+      builder.addByte(random.nextInt(256));
+    }
+    final bytes = builder.toBytes();
+    return  SRP6Util.decodeBigInt(bytes);
+  }
 // Central/Manager bluetooth device sets and transmits modulus and base
 //
 // Peripheral receives modulus and base
