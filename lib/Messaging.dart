@@ -5,8 +5,6 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:hello_world/DeviceList.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
-
-import 'package:starflut/starflut.dart';
 import 'package:win_ble/win_ble.dart';
 
 class Message {
@@ -72,10 +70,10 @@ class _MyPageThreeState extends State<Messaging> {
     List<int> data = await WinBle.read(
         address: address, serviceId: serviceID, characteristicId: charID);
     setState(() {
-      // if (!message.any((element) => element.messageContent == utf8.decode(data))) {
+      if (utf8.decode(data) != "\r") {
         message.add(Message(
             messageContent: utf8.decode(data), messageType: "receiver"));
-      // }
+      }
     });
   }
 
@@ -101,21 +99,21 @@ class _MyPageThreeState extends State<Messaging> {
   void initState() {
     super.initState();
     if (Platform.isWindows){
+
       _connectionStream =
           WinBle.connectionStreamOf("60:8a:10:53:ce:9b").listen((event) {
             setState(() {
               connected = event;
+              subscribeToCharacteristic("60:8a:10:53:ce:9b", '49535343-fe7d-4ae5-8fa9-9fafd205e455', "49535343-1e4d-4bd9-ba61-23c647249616");
             });
           });
 
 
       _characteristicValueStream =
           WinBle.characteristicValueStream.listen((event) {
-            readCharacteristic("60:8a:10:53:ce:9b", '49535343-fe7d-4ae5-8fa9-9fafd205e455', "49535343-1e4d-4bd9-ba61-23c647249616");
-            print("CharValue : $event");
+              print("CharValue : $event");
+              readCharacteristic("60:8a:10:53:ce:9b", '49535343-fe7d-4ae5-8fa9-9fafd205e455', "49535343-1e4d-4bd9-ba61-23c647249616");
           });
-
-      //timer = Timer.periodic(Duration(seconds: 1), (Timer t) => readCharacteristic("60:8a:10:53:ce:9b", '49535343-fe7d-4ae5-8fa9-9fafd205e455', "49535343-1e4d-4bd9-ba61-23c647249616"));
     }
 
     else {

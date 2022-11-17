@@ -7,7 +7,6 @@ import 'package:win_ble/win_ble.dart';
 class Device{
   String name;
   Device({required this.name});
-
 }
 
 class DeviceList extends StatefulWidget {
@@ -25,15 +24,6 @@ class _MyPageTwoState extends State<DeviceList> {
 
   connect(String address) async {
     await WinBle.connect(address);
-  }
-
-  disconnect(address) async {
-    await WinBle.disconnect(address);
-  }
-
-  subscribeToCharacteristic(address, serviceID, charID) async {
-    await WinBle.subscribeToCharacteristic(
-        address: address, serviceId: serviceID, characteristicId: charID);
   }
 
   @override
@@ -77,7 +67,6 @@ class _MyPageTwoState extends State<DeviceList> {
                           if (Platform.isWindows){
                             WinBle.stopScanning();
                             connect("60:8a:10:53:ce:9b");
-                            subscribeToCharacteristic("60:8a:10:53:ce:9b", '49535343-fe7d-4ae5-8fa9-9fafd205e455', "49535343-1e4d-4bd9-ba61-23c647249616");
                             var fromMessagingScreen = await Navigator.push(context, MaterialPageRoute(builder: (context) => Messaging(device: device[index])
                             ));
                             if (fromMessagingScreen == true) {
