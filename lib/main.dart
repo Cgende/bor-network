@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
           if (!discoveredDevices.any((element) => element.id == device.id)) {
             discoveredDevices.add(device);
             discoveredDevicesStreamController.add(discoveredDevices);
-            print(discoveredDevices.length);
+           // print(discoveredDevices.length);
           }
 
           //code for handling results
@@ -165,6 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   alignment: Alignment.center,
                   child: Text(
                     "The BOR Network",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.blue,
                         fontSize: 64,

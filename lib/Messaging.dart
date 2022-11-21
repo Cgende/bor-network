@@ -40,7 +40,9 @@ class _MyPageThreeState extends State<Messaging> {
   List<Message> message = [
     Message(messageContent: "Hello, Will", messageType: "receiver"),
     Message(messageContent: "How have you been?", messageType: "receiver"),
-    Message(messageContent: "Hey Kriss, I am doing fine dude. wbu?", messageType: "sender"),
+    Message(
+        messageContent: "Hey Kriss, I am doing fine dude. wbu?",
+        messageType: "sender"),
     Message(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
     Message(messageContent: "Is there any thing wrong?", messageType: "sender"),
   ];
@@ -48,7 +50,8 @@ class _MyPageThreeState extends State<Messaging> {
   _scrollToEnd() async {
     if (_needsScroll) {
       _needsScroll = false;
-      _scrollController.animateTo(_scrollController.position.maxScrollExtent, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
+      _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
     }
   }
 
@@ -58,27 +61,72 @@ class _MyPageThreeState extends State<Messaging> {
   final Uuid _readUuid = Uuid.parse("49535343-1E4D-4BD9-BA61-23C647249616");
   final Uuid _bleService = Uuid.parse('49535343-FE7D-4AE5-8FA9-9FAFD205E455');
 
-  late final QualifiedCharacteristic _readCharacteristic = QualifiedCharacteristic(
+  ByteData bigIntToByteData(BigInt bigInt) {
+    final data = ByteData((bigInt.bitLength / 8).ceil());
+    var _bigInt = bigInt;
+
+    for (var i = 1; i <= data.lengthInBytes; i++) {
+      data.setUint8(data.lengthInBytes - i, _bigInt.toUnsigned(8).toInt());
+      _bigInt = _bigInt >> 8;
+    }
+
+    return data;
+  }
+
+  late final QualifiedCharacteristic _readCharacteristic =
+      QualifiedCharacteristic(
     serviceId: _bleService,
     characteristicId: _readUuid,
     deviceId: "60:8A:10:53:CE:9B",
   );
 
-  late final QualifiedCharacteristic _writeCharacteristic = QualifiedCharacteristic(
+  late final QualifiedCharacteristic _writeCharacteristic =
+      QualifiedCharacteristic(
     serviceId: _bleService,
     characteristicId: _writeUuid,
     deviceId: "60:8A:10:53:CE:9B",
   );
 
-  late final Stream<List<int>> _readStream = flutterReactiveBle.subscribeToCharacteristic(_readCharacteristic);
+  late final Stream<List<int>> _readStream =
+      flutterReactiveBle.subscribeToCharacteristic(_readCharacteristic);
 
+  late StreamSubscription subscription;
+
+  bool keysDistrubted = false;
   @override
   void initState() {
+
     super.initState();
+    // print('encrypted: ${borNode.encrypt('hello')}');
+    () async {
+      // while (true) {
+      await Future.delayed(Duration(seconds: 3));
+      print("sending mod: ${borNode.modulus}");
+
+      await flutterReactiveBle.writeCharacteristicWithResponse(
+        _writeCharacteristic,
+        value: bigIntToByteData(borNode.modulus).buffer.asUint8List(),
+      );
+
+      print("sending base: ${borNode.base}");
+      await flutterReactiveBle.writeCharacteristicWithResponse(
+        _writeCharacteristic,
+        value: bigIntToByteData(borNode.base).buffer.asUint8List(),
+      );
+
+      print("sending public int: ${borNode.publicInt}");
+      await flutterReactiveBle.writeCharacteristicWithResponse(
+        _writeCharacteristic,
+        value: bigIntToByteData(borNode.publicInt).buffer.asUint8List(),
+      );
+      //  }
+    }.call();
+
     //  Connect to ble-----------------------------------------------------
-    flutterReactiveBle.statusStream.listen((status) async {
+    subscription = flutterReactiveBle.statusStream.listen((status) async {
       debugPrint("BLE STATUS: ${status.toString()}");
       if (status == BleStatus.ready) {
+        print("attempting to connect:");
         flutterReactiveBle
             .connectToDevice(
           // id: "94:B8:6D:F0:BB:48", //WINDOWS
@@ -88,7 +136,10 @@ class _MyPageThreeState extends State<Messaging> {
         )
             .listen((connectionState) {
           print("CONNECTION STATE UPDATE: $connectionState");
-
+          if (connectionState.connectionState ==
+              DeviceConnectionState.connected) {
+            print('HERE');
+          }
           // Handle connection state updates
         }, onError: (Object error) {
           print("ERROR: $error");
@@ -98,14 +149,28 @@ class _MyPageThreeState extends State<Messaging> {
       }
       //  Subscribe to read  ble-----------------------------------------------------
       _readStream.listen(
-            (List<int> data) {
-          print(utf8.decode(data));
-          setState(() {
-            // todo parse message header
-            //
+        (List<int> data) {
+          if (!keysDistrubted) {
+            print('Raw data: $data');
+            final builder = BytesBuilder();
+            for (var i = 0; i < data.length; ++i) {
+              builder.addByte(data[i]);
+            }
+            final bytes = builder.toBytes();
+            print('Cast to big int: ${SRP6Util.decodeBigInt(bytes)}');
+            borNode.distributeKeys(SRP6Util.decodeBigInt(bytes));
+            keysDistrubted = true;
+          }else {
 
-            message.add(Message(messageContent: utf8.decode(data), messageType: "receiver"));
-          });
+            //  print(utf8.decode(data));
+            if(!mounted) return;
+            // setState(() {
+            //   // todo parse message header
+            //   //
+            //   message.add(Message(
+            //       messageContent: borNode.decrypt(data), messageType: "receiver"));
+            // });
+          }
         },
         onError: (Object e) async {
           debugPrint(e.toString());
@@ -113,6 +178,13 @@ class _MyPageThreeState extends State<Messaging> {
       );
     });
   }
+
+  @override
+  dispose(){
+    super.dispose();
+    subscription.cancel();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -139,15 +211,26 @@ class _MyPageThreeState extends State<Messaging> {
               padding: const EdgeInsets.only(top: 10, bottom: 10),
               itemBuilder: (context, index) {
                 return Container(
-                    padding: const EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
+                    padding: const EdgeInsets.only(
+                        left: 16, right: 16, top: 10, bottom: 10),
                     child: RichText(
                       text: TextSpan(
                         style: DefaultTextStyle.of(context).style,
                         children: <TextSpan>[
                           TextSpan(
-                              text: message[index].messageType == "receiver" ? "${device.name}\n" : "You\n",
-                              style: TextStyle(color: message[index].messageType == "receiver" ? Colors.blueAccent : Colors.green, fontSize: 18)),
-                          TextSpan(text: message[index].messageContent, style: const TextStyle(color: Colors.white, fontSize: 16))
+                              text: message[index].messageType == "receiver"
+                                  ? "${device.name}\n"
+                                  : "You\n",
+                              style: TextStyle(
+                                  color:
+                                      message[index].messageType == "receiver"
+                                          ? Colors.blueAccent
+                                          : Colors.green,
+                                  fontSize: 18)),
+                          TextSpan(
+                              text: message[index].messageContent,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 16))
                         ],
                       ),
                     ));
@@ -159,31 +242,41 @@ class _MyPageThreeState extends State<Messaging> {
             child: TextField(
               controller: _textEditingController,
               onSubmitted: (String str) {
+                if(!mounted) return;
+
+                var encrypted = borNode.encrypt(str);
                 setState(() {
-                  message.add(Message(messageContent: str, messageType: "sender"));
+                  message
+                      .add(Message(messageContent: str, messageType: "sender"));
                   _needsScroll = true;
 
-                      () async {
+                  () async {
                     // Todo encrypt message
                     await flutterReactiveBle.writeCharacteristicWithResponse(
                       _writeCharacteristic,
-                      value: const AsciiCodec().encode(borNode.encrypt(str)),
+                      value: encrypted, //borNode.encrypt(str)),
                     );
                   }.call();
                 });
+
+                print('unencrypted: $str');
+                print('encrypted: ${encrypted}');
+                String decrypted = borNode.decrypt(encrypted);
+                print('decrypted: $decrypted');
                 _textEditingController.clear();
               },
               style: const TextStyle(color: Colors.white),
               cursorColor: Colors.white,
               decoration: const InputDecoration(
-                // suffixIcon: IconButton(
-                //   icon: Icon(Icons.send),
-                //   onPressed: (),
-                // ),
+                  // suffixIcon: IconButton(
+                  //   icon: Icon(Icons.send),
+                  //   onPressed: (),
+                  // ),
                   contentPadding: EdgeInsets.all(20),
                   hintText: "Type message here...",
                   hintStyle: TextStyle(color: Colors.white),
-                  focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black))),
+                  focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black))),
             ),
           )
         ],
@@ -193,58 +286,66 @@ class _MyPageThreeState extends State<Messaging> {
 }
 
 class BorNode {
-  late List<BigInt> keys;
+  //late List<BigInt> keys;
+  late final BigInt _key;// = randomBigInt(size: 16);
+  final BigInt secretInt = BigInt.from(Random.secure().nextInt(950) + 50);
+  late final BigInt modulus = randomBigInt(size: 8);
+  final BigInt base =
+      BigInt.from(Random.secure().nextInt(200) + 50); //BigInt.from(69);
+  late final publicInt = base.modPow(secretInt, modulus);
 
-  final BigInt _secretInt = BigInt.from(Random.secure().nextInt(1000)); // todo Inclusive?
-  late final BigInt _modulus = randomBigInt(size: 256);
-  final BigInt _base = BigInt.from(69); // todo Pick or generate this
+  late final encrypter = enc.Encrypter(enc.AES(enc.Key.fromBase16(_key.toRadixString(16).padLeft(32, '0')), mode: enc.AESMode.cbc, padding: null));
 
-  Future<bool> distributeKeys() async {
-    BigInt publicInt = _base.modPow(_secretInt, _modulus);
+  Future<bool> distributeKeys(BigInt receivedInt) async {
     // todo send public int a
     // todo receive int b
-    BigInt receivedInt = BigInt.from(Random.secure().nextInt(1000));
-    BigInt secretKey = receivedInt.modPow(_secretInt, _modulus);
-    keys.add(secretKey);
-    aesTest(secretKey);
+
+    print('Received Int: $receivedInt');
+    print('SecretInt: ${secretInt.toInt()}');
+    print('modulus: $modulus');
+    print('received int ** secret int:${receivedInt.pow(secretInt.toInt())} ');
+    print('answer % modol:${receivedInt % secretInt} ');
+
+    BigInt secretKey = receivedInt.modPow(secretInt, modulus);
+    print('Key1: ${secretKey.bitLength}');
+    secretKey = (secretKey << 64) | (secretKey);
+    print('Key2: ${secretKey.bitLength}');
+    print('Key3: ${secretKey.bitLength}');
+    print('Key4: ${secretKey.toRadixString(16)}');
+    //keys.add(secretKey);
+   // aesTest(secretKey);
+    _key = secretKey;
     return true;
   }
 
-  String encrypt(String message) {
-    final _key = enc.Key.fromUtf8(keys[0].toString());
+  Uint8List encrypt(String message) {
     final iv = enc.IV.fromLength(16);
-    final encrypter = enc.Encrypter(enc.AES(_key));
-    final encrypted = encrypter.encrypt(message, iv: iv);
-    return encrypted.toString();
+    print(iv.bytes);
+    print(_key.toString());
+    final encrypted = encrypter.encrypt(message.padLeft(16, String.fromCharCode(0)), iv: iv);
+    print(encrypted.base16);
+    return encrypted.bytes;
   }
 
-  String decrypt(String message) {
-    final _key = enc.Key.fromUtf8(keys[0].toString());
+  String decrypt(List message) {
     final iv = enc.IV.fromLength(16);
-    final encrypter = enc.Encrypter(enc.AES(_key));
-    enc.Encrypted test = enc.Encrypted.fromUtf8(message);
-    final decrypted = encrypter.decrypt(test, iv: iv);
-    return decrypted.toString();
-  }
+    String encryptedMessageAsHexString= '';
+    for(int byte in message){
+      encryptedMessageAsHexString += byte.toRadixString(16).padLeft(2, '0');
+    }
+    print('encryptedMessageAsHexString $encryptedMessageAsHexString');
+    enc.Encrypted test = enc.Encrypted.fromBase16(encryptedMessageAsHexString);
+    final decrypted = encrypter.decryptBytes(test, iv: iv);
+    print('decrypted bytes: ${decrypted}');
 
-  void aesTest(BigInt key) {
-    const plainText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit';
-    final _key = enc.Key.fromUtf8(key.toString());
-    final iv = enc.IV.fromLength(16);
-
-    final encrypter = enc.Encrypter(enc.AES(_key));
-
-    final encrypted = encrypter.encrypt(plainText, iv: iv);
-    final decrypted = encrypter.decrypt(encrypted, iv: iv);
-
-    print(decrypted); // Lorem ipsum dolor sit amet, consectetur adipiscing elit
-    print(encrypted.base64); // R4PxiU3h8YoIRqVowBXm36ZcCeNeZ4s1OvVBTfFlZRdmohQqOpPQqD1YecJeZMAop/hZ4OxqgC1WtwvX/hP9mw==
+    return utf8.decode(decrypted..removeWhere((element) => element == 0));
   }
 
   void handleMessage(String message) {
     // Get the bits of the header, ie character 0, as a list of ints with a fancy list comprehension
     List<int> headerBits = [
-      for (var bit in utf8.encode(message)[0].toRadixString(2).padLeft(8, '0').split(''))
+      for (var bit
+          in utf8.encode(message)[0].toRadixString(2).padLeft(8, '0').split(''))
         int.parse(bit)
     ];
     if (headerBits.sublist(0, 3) == [1, 0]) {
@@ -275,8 +376,15 @@ class BorNode {
       builder.addByte(random.nextInt(256));
     }
     final bytes = builder.toBytes();
-    return  SRP6Util.decodeBigInt(bytes);
+    return SRP6Util.decodeBigInt(bytes);
   }
+
+  void testDiffeHelman() {
+    // BigInt receivedInt = BigInt.parse('');
+    //BigInt secretKey = receivedInt.modPow(_secretInt, _modulus);
+    print(publicInt);
+  }
+
 // Central/Manager bluetooth device sets and transmits modulus and base
 //
 // Peripheral receives modulus and base
