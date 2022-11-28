@@ -39,6 +39,7 @@ dependencies:
   flutter_reactive_ble: ^5.0.2
   flutter_bluetooth_serial: ^0.3.2
   encrypt: ^5.0.1
+  pointycastle: ^3.6.2
 
 dev_dependencies:
   flutter_test:
