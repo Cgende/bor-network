@@ -12,6 +12,7 @@ void main() {
 
     // ACT
     Uint8List encrypted = encryption.encrypt(plainText);
+    print(encrypted);
     Uint8List decrypted = encryption.decrypt(encrypted);
 
     // ASSERT

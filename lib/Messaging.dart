@@ -37,7 +37,8 @@ class _MyPageThreeState extends State<Messaging> {
   List<Message> message = [
     Message(messageContent: "Hello, Will", messageType: "receiver"),
     Message(messageContent: "How have you been?", messageType: "receiver"),
-    Message(messageContent: "Hey Kriss, I am doing fine dude. wbu?", messageType: "sender"),
+    Message(messageContent: "Hey Kriss, I am doing fine dude. wbu?",
+        messageType: "sender"),
     Message(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
     Message(messageContent: "Is there any thing wrong?", messageType: "sender"),
   ];
@@ -45,7 +46,8 @@ class _MyPageThreeState extends State<Messaging> {
   _scrollToEnd() async {
     if (_needsScroll) {
       _needsScroll = false;
-      _scrollController.animateTo(_scrollController.position.maxScrollExtent, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
+      _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
     }
   }
 
@@ -67,16 +69,19 @@ class _MyPageThreeState extends State<Messaging> {
     deviceId: "60:8A:10:53:CE:9B",
   );
 
-  late final Stream<List<int>> _readStream = ble.subscribeToCharacteristic(_readCharacteristic);
+  late final Stream<List<int>> _readStream = ble.subscribeToCharacteristic(
+      _readCharacteristic);
 
   late StreamSubscription subscription;
+  late StreamSubscription subscription1;
+  late StreamSubscription subscription2;
 
   bool keysDistributed = false;
 
   @override
   void initState() {
     super.initState();
-    () async {
+        () async {
       await Future.delayed(const Duration(seconds: 3));
       debugPrint("sending mod: ${borNode.modulus}");
       await ble.writeCharacteristicWithResponse(
@@ -111,7 +116,8 @@ class _MyPageThreeState extends State<Messaging> {
         )
             .listen((connectionState) {
           print("CONNECTION STATE UPDATE: $connectionState");
-          if (connectionState.connectionState == DeviceConnectionState.connected) {
+          if (connectionState.connectionState ==
+              DeviceConnectionState.connected) {
             print('HERE');
           }
           // Handle connection state updates
@@ -122,8 +128,8 @@ class _MyPageThreeState extends State<Messaging> {
         //todo handle statuses
       }
       //  Subscribe to read  ble-----------------------------------------------------
-      _readStream.listen(
-        (List<int> data) {
+      subscription1 = _readStream.listen(
+            (List<int> data) {
           if (!keysDistributed) {
             // Diffie Hellman
             final builder = BytesBuilder();
@@ -150,6 +156,7 @@ class _MyPageThreeState extends State<Messaging> {
   dispose() {
     super.dispose();
     subscription.cancel();
+    subscription1.cancel();
   }
 
   @override
@@ -177,15 +184,25 @@ class _MyPageThreeState extends State<Messaging> {
               padding: const EdgeInsets.only(top: 10, bottom: 10),
               itemBuilder: (context, index) {
                 return Container(
-                    padding: const EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
+                    padding: const EdgeInsets.only(
+                        left: 16, right: 16, top: 10, bottom: 10),
                     child: RichText(
                       text: TextSpan(
-                        style: DefaultTextStyle.of(context).style,
+                        style: DefaultTextStyle
+                            .of(context)
+                            .style,
                         children: <TextSpan>[
                           TextSpan(
-                              text: message[index].messageType == "receiver" ? "${device.name}\n" : "You\n",
-                              style: TextStyle(color: message[index].messageType == "receiver" ? Colors.blueAccent : Colors.green, fontSize: 18)),
-                          TextSpan(text: message[index].messageContent, style: const TextStyle(color: Colors.white, fontSize: 16))
+                              text: message[index].messageType == "receiver"
+                                  ? "${device.name}\n"
+                                  : "You\n",
+                              style: TextStyle(
+                                  color: message[index].messageType ==
+                                      "receiver" ? Colors.blueAccent : Colors
+                                      .green, fontSize: 18)),
+                          TextSpan(text: message[index].messageContent,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 16))
                         ],
                       ),
                     ));
@@ -199,17 +216,45 @@ class _MyPageThreeState extends State<Messaging> {
               onSubmitted: (String str) {
                 if (!mounted) return;
 
-                var encrypted = borNode.encrypt(str.toUint8List());
-                setState(() {
-                  message.add(Message(messageContent: str, messageType: "sender"));
-                  _needsScroll = true;
-
+                int numberOfPackets = (str.length / 16).ceil();
+                str = str.padRight(numberOfPackets * 16, '0');
+                List<String> messageAsPackets = [];
+                for (var i = 0; i < numberOfPackets; i++) {
+                  var packet = str.substring(i * 16, i * 16 + 16);
+                  messageAsPackets.add(packet);
+                }
+                int index = 1;
+                for(String part in messageAsPackets){
+                  Uint8List encrypted = borNode.encrypt(part.toUint8List());
+                  encrypted = Uint8List.fromList([0, 0, 0, 0, ...encrypted]);
+                  if(index == 1 && index == messageAsPackets.length) encrypted[0] = 192;
+                  if(index == 1 && index != messageAsPackets.length) encrypted[0] = 128;
+                  if(index != 1 && index != messageAsPackets.length) encrypted[0] = 0;
+                  if(index != 1 && index == messageAsPackets.length) encrypted[0] = 64;
+                  print('sending: $encrypted');
                   () async {
                     await ble.writeCharacteristicWithResponse(
                       _writeCharacteristic,
                       value: encrypted,
                     );
                   }.call();
+                }
+                  // 192 if start and end
+                  // 128 if start
+                  // 0 if middle
+                  // 64 if end
+                  //add header and send packet
+
+
+               //   var encrypted = borNode.encrypt(str.toUint8List());
+
+
+                setState(() {
+                  message.add(
+                      Message(messageContent: str, messageType: "sender"));
+                  _needsScroll = true;
+
+
                 });
                 _textEditingController.clear();
               },
@@ -219,7 +264,8 @@ class _MyPageThreeState extends State<Messaging> {
                   contentPadding: EdgeInsets.all(20),
                   hintText: "Type message here...",
                   hintStyle: TextStyle(color: Colors.white),
-                  focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black))),
+                  focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black))),
             ),
           )
         ],

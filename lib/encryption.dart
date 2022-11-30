@@ -5,6 +5,23 @@ import 'dart:typed_data';
 import 'package:encrypt/encrypt.dart';
 import 'package:pointycastle/srp/srp6_util.dart';
 
+
+class BorNode{
+ final Encryption encryptor = Encryption();
+
+ void sendMessage(String message){
+   int numberOfPackets = (message.length / 16).ceil();
+   final splitSize = 16;
+   RegExp exp = new RegExp(r"\d{"+"$splitSize"+"}");
+   String str = "0102031522";
+   Iterable<Match> matches = exp.allMatches(str);
+   var list = matches.map((m) => int.tryParse(m.group(0)!));
+   print(list);
+  }
+}
+
+
+
 // Todo IV stuff
 class Encryption {
   /// Base used in Diffie-Hellman key distribution
@@ -31,6 +48,7 @@ class Encryption {
     BigInt secretKey = publicKey.modPow(_secretInt, modulus);
     secretKey = (secretKey << 64) | (secretKey);
     _key = secretKey.toRadixString(16).padLeft(32, '0');
+    print('key: $_key');
   }
 
   /// Encrypts [bytes] with AES 128 using key
@@ -72,12 +90,14 @@ extension Uint8ListConvertTools on Uint8List {
 }
 
 extension StringConvertTools on String {
+  /// Converts this [String] to Uint8List using UTF-8 encoding
   Uint8List toUint8List() {
     return Uint8List.fromList(utf8.encode(this));
   }
 }
 
 extension BigIntConversionTools on BigInt{
+  /// Converts this [BigInt] to Uint8List
   Uint8List toUint8List() {
     final data = ByteData((bitLength / 8).ceil());
     var bigInt = this;
