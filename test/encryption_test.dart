@@ -11,7 +11,7 @@ void main() {
     Uint8List plainText = 'hello'.toUint8List();
 
     // ACT
-    Uint8List encrypted = encryption.encrypt(plainText);
+    Uint8List encrypted = encryption.encrypt(plainText, 0);
     print(encrypted);
     Uint8List decrypted = encryption.decrypt(encrypted);
 

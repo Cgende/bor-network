@@ -52,10 +52,11 @@ class Encryption {
   }
 
   /// Encrypts [bytes] with AES 128 using key
-  Uint8List encrypt(Uint8List bytes) {
+  Uint8List encrypt(Uint8List bytes, int iv) {
     if (_key == null) throw 'Generate Key must be called before calling encrypt';
-    final iv = IV.fromLength(16);
-    return _encryptor.encryptBytes(bytes, iv: iv).bytes; // Todo might need padding i dont remember why we removed it
+    final initializationVector = IV.fromBase16(iv.toRadixString(16).padLeft(32, '0'));
+    print('initializationVector: ${initializationVector.bytes}');
+    return _encryptor.encryptBytes(bytes, iv: initializationVector).bytes; // Todo might need padding i dont remember why we removed it
   }
 
   /// Decrypts [bytes] with AES 128 using key

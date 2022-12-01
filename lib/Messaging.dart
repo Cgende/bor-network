@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart' hide Key;
@@ -37,8 +38,7 @@ class _MyPageThreeState extends State<Messaging> {
   List<Message> message = [
     Message(messageContent: "Hello, Will", messageType: "receiver"),
     Message(messageContent: "How have you been?", messageType: "receiver"),
-    Message(messageContent: "Hey Kriss, I am doing fine dude. wbu?",
-        messageType: "sender"),
+    Message(messageContent: "Hey Kriss, I am doing fine dude. wbu?", messageType: "sender"),
     Message(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
     Message(messageContent: "Is there any thing wrong?", messageType: "sender"),
   ];
@@ -46,8 +46,7 @@ class _MyPageThreeState extends State<Messaging> {
   _scrollToEnd() async {
     if (_needsScroll) {
       _needsScroll = false;
-      _scrollController.animateTo(_scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
+      _scrollController.animateTo(_scrollController.position.maxScrollExtent, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
     }
   }
 
@@ -69,94 +68,98 @@ class _MyPageThreeState extends State<Messaging> {
     deviceId: "60:8A:10:53:CE:9B",
   );
 
-  late final Stream<List<int>> _readStream = ble.subscribeToCharacteristic(
-      _readCharacteristic);
+  late final Stream<List<int>> _readStream = ble.subscribeToCharacteristic(_readCharacteristic);
 
-  late StreamSubscription subscription;
-  late StreamSubscription subscription1;
-  late StreamSubscription subscription2;
+   StreamSubscription? btConnection;
+   StreamSubscription? subscription1;
+   StreamSubscription? subscription2;
+
+   int packetCounter= 0;
 
   bool keysDistributed = false;
+
+  Future<void> initBluetooth() async {
+    Completer<void> untilConnected = Completer();
+
+    //  Connect to ble----------------------------------------------------------
+    btConnection = ble.statusStream.listen((status) async {
+      debugPrint("BLE STATUS: ${status.toString()}");
+      if (status == BleStatus.ready) {
+        debugPrint("attempting to connect:");
+        // id: "94:B8:6D:F0:BB:48", //WINDOWS
+        // id: "98:E0:D9:A2:34:A0", // MAC
+        subscription2 = ble.connectToDevice(id: "60:8A:10:53:CE:9B", connectionTimeout: const Duration(seconds: 15)).listen((connectionState) {
+          debugPrint("CONNECTION STATE UPDATE: $connectionState");
+          if (connectionState.connectionState == DeviceConnectionState.connected) untilConnected.complete();
+        }, onError: (Object error) {
+          debugPrint("ERROR: $error");
+        });
+      }
+    });
+
+    await untilConnected.future;
+
+    //  Subscribe to read  ble--------------------------------------------------
+    subscription1 = _readStream.listen(
+          (List<int> data) {
+        if (!keysDistributed) {
+          // Diffie Hellman
+          final builder = BytesBuilder();
+          for (var i = 0; i < data.length; ++i) {
+            builder.addByte(data[i]);
+          }
+          final bytes = builder.toBytes();
+          borNode.generateKey(SRP6Util.decodeBigInt(bytes));
+          keysDistributed = true;
+        } else {
+          // Regular Message
+          if (!mounted) return;
+        }
+      },
+      onError: (Object e) async {
+        debugPrint(e.toString());
+      },
+    );
+    await Future.delayed(const Duration(seconds: 5));
+
+    // Do diffie hellman-----------------------------------------------------------
+    debugPrint("sending start code: xyz");
+    await ble.writeCharacteristicWithResponse(
+      _writeCharacteristic,
+      value: 'xyz'.toUint8List(),
+    );
+
+    debugPrint("sending mod: ${borNode.modulus}");
+    await ble.writeCharacteristicWithResponse(
+      _writeCharacteristic,
+      value: borNode.modulus.toUint8List(),
+    );
+
+    debugPrint("sending base: ${borNode.base}");
+    await ble.writeCharacteristicWithResponse(
+      _writeCharacteristic,
+      value: borNode.base.toUint8List(),
+    );
+
+    debugPrint("sending public int: ${borNode.publicKey}");
+    await ble.writeCharacteristicWithResponse(
+      _writeCharacteristic,
+      value: borNode.publicKey.toUint8List(),
+    );
+  }
 
   @override
   void initState() {
     super.initState();
-        () async {
-      await Future.delayed(const Duration(seconds: 3));
-      debugPrint("sending mod: ${borNode.modulus}");
-      await ble.writeCharacteristicWithResponse(
-        _writeCharacteristic,
-        value: borNode.modulus.toUint8List(),
-      );
-
-      debugPrint("sending base: ${borNode.base}");
-      await ble.writeCharacteristicWithResponse(
-        _writeCharacteristic,
-        value: borNode.base.toUint8List(),
-      );
-
-      debugPrint("sending public int: ${borNode.publicKey}");
-      await ble.writeCharacteristicWithResponse(
-        _writeCharacteristic,
-        value: borNode.publicKey.toUint8List(),
-      );
-    }.call();
-
-    //  Connect to ble-----------------------------------------------------
-    subscription = ble.statusStream.listen((status) async {
-      debugPrint("BLE STATUS: ${status.toString()}");
-      if (status == BleStatus.ready) {
-        print("attempting to connect:");
-        ble
-            .connectToDevice(
-          // id: "94:B8:6D:F0:BB:48", //WINDOWS
-          // id: "98:E0:D9:A2:34:A0", // MAC
-          id: "60:8A:10:53:CE:9B", // FPGA
-          connectionTimeout: const Duration(seconds: 15),
-        )
-            .listen((connectionState) {
-          print("CONNECTION STATE UPDATE: $connectionState");
-          if (connectionState.connectionState ==
-              DeviceConnectionState.connected) {
-            print('HERE');
-          }
-          // Handle connection state updates
-        }, onError: (Object error) {
-          print("ERROR: $error");
-          // Handle a possible error
-        });
-        //todo handle statuses
-      }
-      //  Subscribe to read  ble-----------------------------------------------------
-      subscription1 = _readStream.listen(
-            (List<int> data) {
-          if (!keysDistributed) {
-            // Diffie Hellman
-            final builder = BytesBuilder();
-            for (var i = 0; i < data.length; ++i) {
-              builder.addByte(data[i]);
-            }
-            final bytes = builder.toBytes();
-            borNode.generateKey(SRP6Util.decodeBigInt(bytes));
-            keysDistributed = true;
-          } else {
-            // Regular Message
-            if (!mounted) return;
-            // todo parse message header
-          }
-        },
-        onError: (Object e) async {
-          debugPrint(e.toString());
-        },
-      );
-    });
+    initBluetooth();
   }
 
   @override
   dispose() {
     super.dispose();
-    subscription.cancel();
-    subscription1.cancel();
+    btConnection?.cancel();
+    subscription1?.cancel();
+    subscription2?.cancel();
   }
 
   @override
@@ -184,25 +187,13 @@ class _MyPageThreeState extends State<Messaging> {
               padding: const EdgeInsets.only(top: 10, bottom: 10),
               itemBuilder: (context, index) {
                 return Container(
-                    padding: const EdgeInsets.only(
-                        left: 16, right: 16, top: 10, bottom: 10),
+                    padding: const EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
                     child: RichText(
                       text: TextSpan(
-                        style: DefaultTextStyle
-                            .of(context)
-                            .style,
+                        style: DefaultTextStyle.of(context).style,
                         children: <TextSpan>[
-                          TextSpan(
-                              text: message[index].messageType == "receiver"
-                                  ? "${device.name}\n"
-                                  : "You\n",
-                              style: TextStyle(
-                                  color: message[index].messageType ==
-                                      "receiver" ? Colors.blueAccent : Colors
-                                      .green, fontSize: 18)),
-                          TextSpan(text: message[index].messageContent,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 16))
+                          TextSpan(text: message[index].messageType == "receiver" ? "${device.name}\n" : "You\n", style: TextStyle(color: message[index].messageType == "receiver" ? Colors.blueAccent : Colors.green, fontSize: 18)),
+                          TextSpan(text: message[index].messageContent, style: const TextStyle(color: Colors.white, fontSize: 16))
                         ],
                       ),
                     ));
@@ -216,21 +207,23 @@ class _MyPageThreeState extends State<Messaging> {
               onSubmitted: (String str) {
                 if (!mounted) return;
 
-                int numberOfPackets = (str.length / 16).ceil();
-                str = str.padRight(numberOfPackets * 16, '0');
+                int partLength = 15;
+                int numberOfPackets = (str.length / partLength).ceil();
+                str = str.padRight(numberOfPackets * partLength, String.fromCharCodes([0]));
                 List<String> messageAsPackets = [];
                 for (var i = 0; i < numberOfPackets; i++) {
-                  var packet = str.substring(i * 16, i * 16 + 16);
+                  var packet = str.substring(i * partLength, i * partLength + partLength);
                   messageAsPackets.add(packet);
                 }
                 int index = 1;
-                for(String part in messageAsPackets){
-                  Uint8List encrypted = borNode.encrypt(part.toUint8List());
+                for (String part in messageAsPackets) {
+                  print('plaintext: ${part}');
+                  Uint8List encrypted = borNode.encrypt(part.toUint8List(), packetCounter);
                   encrypted = Uint8List.fromList([0, 0, 0, 0, ...encrypted]);
-                  if(index == 1 && index == messageAsPackets.length) encrypted[0] = 192;
-                  if(index == 1 && index != messageAsPackets.length) encrypted[0] = 128;
-                  if(index != 1 && index != messageAsPackets.length) encrypted[0] = 0;
-                  if(index != 1 && index == messageAsPackets.length) encrypted[0] = 64;
+                  if (index == 1 && index == messageAsPackets.length) encrypted[0] = 192;
+                  if (index == 1 && index != messageAsPackets.length) encrypted[0] = 128;
+                  if (index != 1 && index != messageAsPackets.length) encrypted[0] = 0;
+                  if (index != 1 && index == messageAsPackets.length) encrypted[0] = 64;
                   print('sending: $encrypted');
                   () async {
                     await ble.writeCharacteristicWithResponse(
@@ -238,34 +231,27 @@ class _MyPageThreeState extends State<Messaging> {
                       value: encrypted,
                     );
                   }.call();
+                  index++;
+                  packetCounter++;
+
                 }
-                  // 192 if start and end
-                  // 128 if start
-                  // 0 if middle
-                  // 64 if end
-                  //add header and send packet
+                // 192 if start and end
+                // 128 if start
+                // 0 if middle
+                // 64 if end
+                //add header and send packet
 
-
-               //   var encrypted = borNode.encrypt(str.toUint8List());
-
+                //   var encrypted = borNode.encrypt(str.toUint8List());
 
                 setState(() {
-                  message.add(
-                      Message(messageContent: str, messageType: "sender"));
+                  message.add(Message(messageContent: str, messageType: "sender"));
                   _needsScroll = true;
-
-
                 });
                 _textEditingController.clear();
               },
               style: const TextStyle(color: Colors.white),
               cursorColor: Colors.white,
-              decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.all(20),
-                  hintText: "Type message here...",
-                  hintStyle: TextStyle(color: Colors.white),
-                  focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black))),
+              decoration: const InputDecoration(contentPadding: EdgeInsets.all(20), hintText: "Type message here...", hintStyle: TextStyle(color: Colors.white), focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black))),
             ),
           )
         ],
