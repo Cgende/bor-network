@@ -45,7 +45,7 @@ class _MyPageTwoState extends State<DeviceList> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Messaging(device: device[index])
+                                  builder: (context) => Messaging(device: device[index], host: index % 2 == 0,)
                               ));
                         },
                         style: OutlinedButton.styleFrom(

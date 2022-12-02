@@ -6,6 +6,8 @@ import 'package:flutter/material.dart' hide Key;
 import 'package:hello_world/DeviceList.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:pointycastle/srp/srp6_util.dart';
+import 'package:flutter_ble_peripheral/flutter_ble_peripheral.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'encryption.dart';
 
@@ -18,8 +20,9 @@ class Message {
 
 class Messaging extends StatefulWidget {
   final Device device;
+  final bool host;
 
-  const Messaging({super.key, required this.device});
+  const Messaging({super.key, required this.device, required this.host});
 
   @override
   State createState() => _MyPageThreeState();
@@ -70,15 +73,13 @@ class _MyPageThreeState extends State<Messaging> {
 
   late final Stream<List<int>> _readStream = ble.subscribeToCharacteristic(_readCharacteristic);
 
-   StreamSubscription? btConnection;
-   StreamSubscription? subscription1;
-   StreamSubscription? subscription2;
-
-   int packetCounter= 0;
+  StreamSubscription? btConnection;
+  StreamSubscription? subscription1;
+  StreamSubscription? subscription2;
 
   bool keysDistributed = false;
 
-  Future<void> initBluetooth() async {
+  Future<void> initHost() async {
     Completer<void> untilConnected = Completer();
 
     //  Connect to ble----------------------------------------------------------
@@ -86,9 +87,14 @@ class _MyPageThreeState extends State<Messaging> {
       debugPrint("BLE STATUS: ${status.toString()}");
       if (status == BleStatus.ready) {
         debugPrint("attempting to connect:");
-        // id: "94:B8:6D:F0:BB:48", //WINDOWS
-        // id: "98:E0:D9:A2:34:A0", // MAC
-        subscription2 = ble.connectToDevice(id: "60:8A:10:53:CE:9B", connectionTimeout: const Duration(seconds: 15)).listen((connectionState) {
+        // "94:B8:6D:F0:BB:48" WINDOWS
+        // "98:E0:D9:A2:34:A0" MAC
+        // "60:8A:10:53:CE:9B" PMOD
+        // '00:06:66:EB:E2:35' blue smurf
+        // '98:0D:2E:8F:30:B6' pixel 2
+        // 'DC:E5:5B:26:E4:D4' josh phone
+
+        subscription2 = ble.connectToDevice(id: "60:8A:10:53:CE:9B", connectionTimeout: const Duration(seconds: 60)).listen((connectionState) {
           debugPrint("CONNECTION STATE UPDATE: $connectionState");
           if (connectionState.connectionState == DeviceConnectionState.connected) untilConnected.complete();
         }, onError: (Object error) {
@@ -100,27 +106,46 @@ class _MyPageThreeState extends State<Messaging> {
     await untilConnected.future;
 
     //  Subscribe to read  ble--------------------------------------------------
+    List<int> packetBuffer = [];
+    List<int> byteBuffer = [];
     subscription1 = _readStream.listen(
-          (List<int> data) {
+      (List<int> data) {
+        if (!mounted) return;
+        var receivedBytes = data.toUint8List();
         if (!keysDistributed) {
-          // Diffie Hellman
-          final builder = BytesBuilder();
-          for (var i = 0; i < data.length; ++i) {
-            builder.addByte(data[i]);
-          }
-          final bytes = builder.toBytes();
-          borNode.generateKey(SRP6Util.decodeBigInt(bytes));
+          // Assume the first message is receiving diffie hellman public int
+          borNode.generateKey(receivedBytes);
           keysDistributed = true;
         } else {
           // Regular Message
-          if (!mounted) return;
+          debugPrint('Received Message: ${receivedBytes.toString()}');
+          final header = receivedBytes.sublist(0, 4);
+          final body = receivedBytes.sublist(4);
+          // add to buffer
+          final decrypted = borNode.decrypt(body.toUint8List());
+          print('decrypted: $decrypted');
+          packetBuffer.addAll(decrypted);
+
+          // if the end flag is, high show on screen
+          if (header[0] == 128) //end
+          {
+            setState(() {
+              print(packetBuffer.toUint8List().utf8Decode());
+              print(packetBuffer.toUint8List());
+              print(packetBuffer);
+              message.add(Message(messageContent: packetBuffer.toUint8List().utf8Decode(), messageType: "receiver"));
+              _needsScroll = true;
+            });
+            packetBuffer.clear();
+            _textEditingController.clear();
+          }
         }
       },
       onError: (Object e) async {
         debugPrint(e.toString());
       },
     );
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 5)); // Todo could replace with a ready signal from fpga
 
     // Do diffie hellman-----------------------------------------------------------
     debugPrint("sending start code: xyz");
@@ -148,10 +173,37 @@ class _MyPageThreeState extends State<Messaging> {
     );
   }
 
+  void initPeripheral() async {
+    final Map<Permission, PermissionStatus> statuses = await [
+      Permission.bluetooth,
+      Permission.bluetoothAdvertise,
+      Permission.location,
+    ].request();
+    blePeripheral.enableBluetooth();
+    await blePeripheral.start(advertiseData: advertiseData);
+    while (true) {
+      await Future.delayed(Duration(seconds: 1));
+      print(blePeripheral.isConnected);
+    }
+  }
+
+  final AdvertiseData advertiseData = AdvertiseData(
+    serviceUuid: 'bf27730d-860a-4e09-889c-2d8b6a9e0fe7',
+    manufacturerId: 1234,
+    manufacturerData: Uint8List.fromList([1, 2, 3, 4, 5, 6]),
+  );
+
+  final FlutterBlePeripheral blePeripheral = FlutterBlePeripheral();
+
   @override
   void initState() {
     super.initState();
-    initBluetooth();
+    debugPrint('Initializing with host mode == ${widget.host}');
+    if (widget.host) {
+      initHost();
+    } else {
+      initPeripheral();
+    }
   }
 
   @override
@@ -207,24 +259,27 @@ class _MyPageThreeState extends State<Messaging> {
               onSubmitted: (String str) {
                 if (!mounted) return;
 
-                int partLength = 15;
-                int numberOfPackets = (str.length / partLength).ceil();
-                str = str.padRight(numberOfPackets * partLength, String.fromCharCodes([0]));
-                List<String> messageAsPackets = [];
+                // Decode the string with utf8 into byte array and make sure its a multiple of 16 bytes
+                var bytes = str.toUint8List();
+                int partLength = 16;
+                int numberOfPackets = (bytes.length / partLength).ceil();
+                bytes = bytes.padRight(numberOfPackets * partLength, 0);
+
+                // split the byte array in 16 bytes packets
+                List<Uint8List> messageAsPackets = [];
                 for (var i = 0; i < numberOfPackets; i++) {
-                  var packet = str.substring(i * partLength, i * partLength + partLength);
+                  var packet = bytes.sublist(i * partLength, i * partLength + partLength);
                   messageAsPackets.add(packet);
                 }
+
+                // loop through those packets, encryting and sending over blutooth
                 int index = 1;
-                for (String part in messageAsPackets) {
-                  print('plaintext: ${part}');
-                  Uint8List encrypted = borNode.encrypt(part.toUint8List(), packetCounter);
-                  encrypted = Uint8List.fromList([0, 0, 0, 0, ...encrypted]);
-                  if (index == 1 && index == messageAsPackets.length) encrypted[0] = 192;
-                  if (index == 1 && index != messageAsPackets.length) encrypted[0] = 128;
-                  if (index != 1 && index != messageAsPackets.length) encrypted[0] = 0;
-                  if (index != 1 && index == messageAsPackets.length) encrypted[0] = 64;
-                  print('sending: $encrypted');
+                for (Uint8List part in messageAsPackets) {
+                  debugPrint('plaintext: ${part}');
+                  Uint8List encrypted = borNode.encrypt(part);
+                  encrypted = [0, 0, 0, 0, ...encrypted].toUint8List();
+                  if (index == messageAsPackets.length) encrypted[0] = 128; // if its the last packet
+                  debugPrint('sending: $encrypted');
                   () async {
                     await ble.writeCharacteristicWithResponse(
                       _writeCharacteristic,
@@ -232,16 +287,66 @@ class _MyPageThreeState extends State<Messaging> {
                     );
                   }.call();
                   index++;
-                  packetCounter++;
-
                 }
+
+                // // make sure string is multiple of packet size - 1, by padding the right side with null characters
+                // int partLength = 16;
+                // int numberOfPackets = (str.length / partLength).ceil();
+                // str = str.padRight(numberOfPackets * partLength - 1, String.fromCharCodes([0]));
+                //
+                // // pad the start of the string with the node id (1 byte), now its a multiple of 16
+                // int nodeId = 2;
+                // str = str.padLeft(numberOfPackets * partLength, String.fromCharCodes([nodeId]));
+                //
+                // // Encrypt it and prepend with length
+                // Uint8List encrypted = borNode.encrypt(str.toUint8List(), packetCounter);
+                // encrypted = [encrypted.length, ...encrypted].toUint8List();
+                //
+                // // send it out
+                // () async {
+                //   await ble.writeCharacteristicWithResponse(
+                //     _writeCharacteristic,
+                //     value: encrypted,
+                //   );
+                // }.call();
+
+                // // make sure string is multiple of packet size - 1, by padding the right side with null characters
+                // int partLength = 16;
+                // int numberOfPackets = ((str.length + 1) / partLength).ceil();
+                // str = str.padRight(numberOfPackets * partLength - 1, String.fromCharCodes([0]));
+                //
+                // // pad the start of the string with the node id (1 byte), now its a mutiple of 16
+                // int nodeId = 0;
+                // str = str.padLeft(numberOfPackets * partLength, String.fromCharCodes([nodeId]));
+                //
+                // // Split the string in 16 bit packets
+                // List<String> messageAsPackets = [];
+                // for (var i = 0; i < numberOfPackets; i++) {
+                //   var packet = str.substring(i * partLength, i * partLength + partLength);
+                //   messageAsPackets.add(packet);
+                // }
+                //
+                // // encrypt those packets, and toss on a packet header in the remaining 4 bytes
+                // int index = 1;
+                // for (String part in messageAsPackets) {
+                //   debugPrint('plaintext: ${part}');
+                //   Uint8List encrypted = borNode.encrypt(part.toUint8List(), packetCounter);
+                //   encrypted = [0, 0, 0, 0, ...encrypted].toUint8List();
+                //   if ( index == messageAsPackets.length) encrypted[0] = 128; // if its the last packet
+                //   debugPrint('sending: $encrypted');
+                //       () async {
+                //     await ble.writeCharacteristicWithResponse(
+                //       _writeCharacteristic,
+                //       value: encrypted,
+                //     );
+                //   }.call();
+                //   index++;
+                //   packetCounter++;
+                // }
                 // 192 if start and end
                 // 128 if start
                 // 0 if middle
                 // 64 if end
-                //add header and send packet
-
-                //   var encrypted = borNode.encrypt(str.toUint8List());
 
                 setState(() {
                   message.add(Message(messageContent: str, messageType: "sender"));
@@ -258,4 +363,21 @@ class _MyPageThreeState extends State<Messaging> {
       ),
     );
   }
+
+// Uint8List encryptLayer({required Uint8List message, required int nodeId}){
+//   // make sure string is multiple of packet size - 1, by padding the right side with null characters
+//   int partLength = 16;
+//   int numberOfPackets = (message.length / partLength).ceil();
+//   message.toList().expand((element) => null)
+//   //message = message.padRight(numberOfPackets * partLength - 1, String.fromCharCodes([0]));
+//
+//   // pad the start of the string with the node id (1 byte), now its a multiple of 16
+//   int nodeId = 2;
+//   //message = message.padLeft(numberOfPackets * partLength, String.fromCharCodes([nodeId]));
+//
+//   // Encrypt it and prepend with length
+//   Uint8List encrypted = borNode.encrypt(message.toUint8List(), packetCounter);
+//   encrypted = [encrypted.length, ...encrypted].toUint8List();
+//   return '';
+// }
 }

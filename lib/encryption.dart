@@ -9,6 +9,12 @@ import 'package:pointycastle/srp/srp6_util.dart';
 class BorNode{
  final Encryption encryptor = Encryption();
 
+
+
+
+
+
+
  void sendMessage(String message){
    int numberOfPackets = (message.length / 16).ceil();
    final splitSize = 16;
@@ -33,6 +39,8 @@ class Encryption {
   /// Public integer used in Diffie-Hellman key distribution
   late final BigInt publicKey = base.modPow(_secretInt, modulus);
 
+  int iv = 0;
+
   /// 128 bit AES key as Base 16 String
   String? _key;
 
@@ -40,31 +48,34 @@ class Encryption {
   final BigInt _secretInt = BigInt.from(Random.secure().nextInt(950) + 50);
 
   /// Encryptor for AES encrypting
-  late final Encrypter _encryptor = Encrypter(AES(Key.fromBase16(_key!), mode: AESMode.cbc));
+  late final Encrypter _encryptor = Encrypter(AES(Key.fromBase16(_key!), mode: AESMode.cbc, padding: null));
 
   /// Generates a shared private key from a [publicKey] for use in AES encryption. This method must be called before encryption/decryption
-  void generateKey(BigInt publicKey) async {
+  void generateKey(Uint8List data) async {
     if(_key != null) throw 'Key already generated, don\'t call this method twice';
-    BigInt secretKey = publicKey.modPow(_secretInt, modulus);
+    BigInt secretKey = data.toBigInt().modPow(_secretInt, modulus);
     secretKey = (secretKey << 64) | (secretKey);
     _key = secretKey.toRadixString(16).padLeft(32, '0');
     print('key: $_key');
+    print('key ${secretKey.toUint8List()}');
   }
 
   /// Encrypts [bytes] with AES 128 using key
-  Uint8List encrypt(Uint8List bytes, int iv) {
+  Uint8List encrypt(Uint8List bytes) {
     if (_key == null) throw 'Generate Key must be called before calling encrypt';
     final initializationVector = IV.fromBase16(iv.toRadixString(16).padLeft(32, '0'));
+    iv++;
     print('initializationVector: ${initializationVector.bytes}');
-    return _encryptor.encryptBytes(bytes, iv: initializationVector).bytes; // Todo might need padding i dont remember why we removed it
+    return _encryptor.encryptBytes(bytes, iv: initializationVector).bytes;
   }
 
   /// Decrypts [bytes] with AES 128 using key
   Uint8List decrypt(Uint8List bytes) {
     if (_key == null) throw 'Generate Key must be called before calling decrypt';
-    final iv = IV.fromLength(16);
+    final initializationVector = IV.fromBase16(iv.toRadixString(16).padLeft(32, '0'));
+    iv++;
     Encrypted encrypted = Encrypted.fromBase16(bytes.toHexString());
-    return Uint8List.fromList(_encryptor.decryptBytes(encrypted, iv: iv));
+    return Uint8List.fromList(_encryptor.decryptBytes(encrypted, iv: initializationVector));
   }
 
   /// Generates a random big int of length [sizeInBytes]
@@ -88,6 +99,39 @@ extension Uint8ListConvertTools on Uint8List {
     }
     return hexString;
   }
+
+  BigInt toBigInt() {
+    final builder = BytesBuilder();
+    for (var i = 0; i < length; ++i) {
+      builder.addByte(this[i]);
+    }
+    final bytes = builder.toBytes();
+    return SRP6Util.decodeBigInt(bytes);
+  }
+
+  String utf8Decode(){
+    return utf8.decode(this);
+  }
+
+  Uint8List padLeft(int width, [int padding = 0]){
+    int paddingLength = width - length;
+    if(paddingLength < 0) throw 'would require negative padding';
+    List<int> list = toList();
+    for(int i = 0; i < paddingLength; i++){
+      list = [padding,...list];
+    }
+    return list.toUint8List();
+  }
+
+  Uint8List padRight(int width, [int padding = 0]){
+    int paddingLength = width - length;
+    if(paddingLength < 0) throw 'would require negative padding';
+    List<int> list = toList();
+    for(int i = 0; i < paddingLength; i++){
+      list = [...list, padding];
+    }
+    return list.toUint8List();
+  }
 }
 
 extension StringConvertTools on String {
@@ -107,5 +151,11 @@ extension BigIntConversionTools on BigInt{
       bigInt = bigInt >> 8;
     }
     return data.buffer.asUint8List();
+  }
+}
+
+extension ListConverttools on List<int>{
+  Uint8List toUint8List(){
+    return Uint8List.fromList(this);
   }
 }
