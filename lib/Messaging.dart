@@ -5,8 +5,10 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart' hide Key;
 import 'package:hello_world/DeviceList.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
+import 'dart:io' show Platform;
 import 'package:pointycastle/srp/srp6_util.dart';
 import 'package:flutter_ble_peripheral/flutter_ble_peripheral.dart';
+import 'package:win_ble/win_ble.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'encryption.dart';
@@ -79,7 +81,7 @@ class _MyPageThreeState extends State<Messaging> {
 
   bool keysDistributed = false;
 
-  Future<void> initHost() async {
+  Future<void> androidInit() async {
     Completer<void> untilConnected = Completer();
 
     //  Connect to ble----------------------------------------------------------
@@ -173,19 +175,6 @@ class _MyPageThreeState extends State<Messaging> {
     );
   }
 
-  void initPeripheral() async {
-    final Map<Permission, PermissionStatus> statuses = await [
-      Permission.bluetooth,
-      Permission.bluetoothAdvertise,
-      Permission.location,
-    ].request();
-    blePeripheral.enableBluetooth();
-    await blePeripheral.start(advertiseData: advertiseData);
-    while (true) {
-      await Future.delayed(Duration(seconds: 1));
-      print(blePeripheral.isConnected);
-    }
-  }
 
   final AdvertiseData advertiseData = AdvertiseData(
     serviceUuid: 'bf27730d-860a-4e09-889c-2d8b6a9e0fe7',
@@ -194,16 +183,90 @@ class _MyPageThreeState extends State<Messaging> {
   );
 
   final FlutterBlePeripheral blePeripheral = FlutterBlePeripheral();
+  StreamSubscription? _connectionStream;
+  StreamSubscription? _characteristicValueStream;
+
+
+  writeCharacteristic(String address, serviceID, charID,
+      Uint8List data, bool writeWithResponse) async {
+    await WinBle.write(
+        address: address,
+        service: serviceID,
+        characteristic: charID,
+        data: data,
+        writeWithResponse: writeWithResponse);
+  }
+
+  subscribeToCharacteristic(address, serviceID, charID) async {
+    await WinBle.subscribeToCharacteristic(
+        address: address, serviceId: serviceID, characteristicId: charID);
+  }
+
+  readCharacteristic(address, serviceID, charID) async {
+    List<int> data = await WinBle.read(
+        address: address, serviceId: serviceID, characteristicId: charID);
+    setState(() {
+      if (utf8.decode(data) != "\r") {
+        message.add(Message(
+            messageContent: utf8.decode(data), messageType: "receiver"));
+      }
+    });
+  }
+
+  void windowsInit(){
+    _connectionStream =
+        WinBle.connectionStreamOf("60:8a:10:53:ce:9b").listen((event) {
+          setState(() {
+            subscribeToCharacteristic("60:8a:10:53:ce:9b", '49535343-fe7d-4ae5-8fa9-9fafd205e455', "49535343-1e4d-4bd9-ba61-23c647249616");
+          });
+        });
+
+
+    _characteristicValueStream =
+        WinBle.characteristicValueStream.listen((event) {
+          print("CharValue : $event");
+          readCharacteristic("60:8a:10:53:ce:9b", '49535343-fe7d-4ae5-8fa9-9fafd205e455', "49535343-1e4d-4bd9-ba61-23c647249616");
+          print(event.runtimeType);
+          // if (!mounted) return;
+          // var receivedBytes = data.toUint8List();
+          // if (!keysDistributed) {
+          //   // Assume the first message is receiving diffie hellman public int
+          //   borNode.generateKey(receivedBytes);
+          //   keysDistributed = true;
+          // } else {
+          //   // Regular Message
+          //   debugPrint('Received Message: ${receivedBytes.toString()}');
+          //   final header = receivedBytes.sublist(0, 4);
+          //   final body = receivedBytes.sublist(4);
+          //   // add to buffer
+          //   final decrypted = borNode.decrypt(body.toUint8List());
+          //   print('decrypted: $decrypted');
+          //   packetBuffer.addAll(decrypted);
+          //
+          //   // if the end flag is, high show on screen
+          //   if (header[0] == 128) //end
+          //       {
+          //     setState(() {
+          //       print(packetBuffer.toUint8List().utf8Decode());
+          //       print(packetBuffer.toUint8List());
+          //       print(packetBuffer);
+          //       message.add(Message(messageContent: packetBuffer.toUint8List().utf8Decode(), messageType: "receiver"));
+          //       _needsScroll = true;
+          //     });
+          //     packetBuffer.clear();
+          //     _textEditingController.clear();
+          //   }
+          // }
+        });
+  }
+
 
   @override
   void initState() {
     super.initState();
     debugPrint('Initializing with host mode == ${widget.host}');
-    if (widget.host) {
-      initHost();
-    } else {
-      initPeripheral();
-    }
+    if(Platform.isWindows) androidInit();
+    if(Platform.isAndroid) windowsInit();
   }
 
   @override
