@@ -62,8 +62,17 @@ class _MyPageThreeState extends State<Messaging> {
 
   late final Stream<List<int>> _readStream = flutterReactiveBle.subscribeToCharacteristic(_readCharacteristic);
 
+  connect(String address) async {
+    await WinBle.connect(address);
+  }
+
   disconnect(address) async {
     await WinBle.disconnect(address);
+  }
+
+  subscribeToCharacteristic(address, serviceID, charID) async {
+    await WinBle.subscribeToCharacteristic(
+        address: address, serviceId: serviceID, characteristicId: charID);
   }
 
   readCharacteristic(address, serviceID, charID) async {
@@ -85,11 +94,6 @@ class _MyPageThreeState extends State<Messaging> {
         characteristic: charID,
         data: data,
         writeWithResponse: writeWithResponse);
-  }
-
-  subscribeToCharacteristic(address, serviceID, charID) async {
-    await WinBle.subscribeToCharacteristic(
-        address: address, serviceId: serviceID, characteristicId: charID);
   }
 
   StreamSubscription? _connectionStream;

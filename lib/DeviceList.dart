@@ -34,9 +34,9 @@ class _MyPageTwoState extends State<DeviceList> {
         setState(() {
           var contain = device.where((element) => element.name == event.address);
           if (contain.isEmpty) {
-            if (event.address == "60:8a:10:53:ce:9b") {
+            // if (event.address == "60:8a:10:53:ce:9b") {
               device.add(Device(name: event.address));
-            }
+            // }
           }
         });
       });

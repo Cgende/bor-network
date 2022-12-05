@@ -199,10 +199,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   alignment: Alignment.center,
                   child: ElevatedButton(
                     onPressed: () {
-                      WinBle.startScanning();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
+                      if (Platform.isWindows) {
+                        WinBle.startScanning();
+                      }
+                      Navigator.push(context, MaterialPageRoute(
                               builder: (context) => DeviceList()));
                     },
                     style: ElevatedButton.styleFrom(
