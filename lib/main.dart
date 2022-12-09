@@ -6,7 +6,7 @@ import 'dart:typed_data';
 import 'dart:core';
 import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
-import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
+//import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:hello_world/DeviceList.dart';
 import 'package:win_ble/win_ble.dart';
@@ -45,7 +45,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final flutterReactiveBle = FlutterReactiveBle();
+  //final flutterReactiveBle = FlutterReactiveBle();
   List discoveredDevices = [];
 
   StreamSubscription? scanStream;
@@ -71,72 +71,72 @@ class _MyHomePageState extends State<MyHomePage> {
         });
       });
     }
-    else {
-      //  BLE
-      flutterReactiveBle.statusStream.listen((status) async {
-        debugPrint("BLE STATUS: ${status.toString()}");
-
-        if (status == BleStatus.ready) {
-          flutterReactiveBle.scanForDevices(
-              scanMode: ScanMode.lowLatency, withServices: []).listen((device) {
-            if (!discoveredDevices.any((element) => element.id == device.id)) {
-              discoveredDevices.add(device);
-              discoveredDevicesStreamController.add(discoveredDevices);
-              print(discoveredDevices.length);
-            }
-
-            //code for handling results
-          }, onError: (error) {
-            //code for handling error
-          });
-
-          // while(true) {
-          //   flutterReactiveBle.connectToDevice(
-          //     // id: "94:B8:6D:F0:BB:48", //WINDOWS
-          //     id: "98:E0:D9:A2:34:A0", // MAC
-          //     connectionTimeout: const Duration(seconds: 15),
-          //   ).listen((connectionState) {
-          //     print("CONNECTION STATE UPDATE: $connectionState");
-          //
-          //     // Handle connection state updates
-          //   }, onError: (Object error) {
-          //     print("ERROR: $error");
-          //     // Handle a possible error
-          //   });
-          //
-          //   await Future.delayed(Duration(seconds: 15));
-          // }
-        }
-        //todo handle statuses
-      });
-
-// // BLUETOOTH CLASSIC
+//     else {
+//       //  BLE
+//       flutterReactiveBle.statusStream.listen((status) async {
+//         debugPrint("BLE STATUS: ${status.toString()}");
 //
-//     () async {
-//       try {
-//         BluetoothConnection connection =
-//             await BluetoothConnection.toAddress("94:B8:6D:F0:BB:48"); // WINDOWS
-//         // BluetoothConnection connection =
-//         //     await BluetoothConnection.toAddress("98:E0:D9:A2:34:A0"); // MAC
+//         if (status == BleStatus.ready) {
+//           flutterReactiveBle.scanForDevices(
+//               scanMode: ScanMode.lowLatency, withServices: []).listen((device) {
+//             if (!discoveredDevices.any((element) => element.id == device.id)) {
+//               discoveredDevices.add(device);
+//               discoveredDevicesStreamController.add(discoveredDevices);
+//               print(discoveredDevices.length);
+//             }
 //
-//         print('Connected to the device');
+//             //code for handling results
+//           }, onError: (error) {
+//             //code for handling error
+//           });
 //
-//         connection.input?.listen((Uint8List data) {
-//           print('Data incoming: ${ascii.decode(data)}');
-//           connection.output.add(data); // Sending data
+//           // while(true) {
+//           //   flutterReactiveBle.connectToDevice(
+//           //     // id: "94:B8:6D:F0:BB:48", //WINDOWS
+//           //     id: "98:E0:D9:A2:34:A0", // MAC
+//           //     connectionTimeout: const Duration(seconds: 15),
+//           //   ).listen((connectionState) {
+//           //     print("CONNECTION STATE UPDATE: $connectionState");
+//           //
+//           //     // Handle connection state updates
+//           //   }, onError: (Object error) {
+//           //     print("ERROR: $error");
+//           //     // Handle a possible error
+//           //   });
+//           //
+//           //   await Future.delayed(Duration(seconds: 15));
+//           // }
+//         }
+//         //todo handle statuses
+//       });
 //
-//           if (ascii.decode(data).contains('!')) {
-//             connection.finish(); // Closing connection
-//             print('Disconnecting by local host');
-//           }
-//         }).onDone(() {
-//           print('Disconnected by remote request');
-//         });
-//       } catch (exception) {
-//         print('Cannot connect, exception occured');
-//       }
-//     }.call();
-    }
+// // // BLUETOOTH CLASSIC
+// //
+// //     () async {
+// //       try {
+// //         BluetoothConnection connection =
+// //             await BluetoothConnection.toAddress("94:B8:6D:F0:BB:48"); // WINDOWS
+// //         // BluetoothConnection connection =
+// //         //     await BluetoothConnection.toAddress("98:E0:D9:A2:34:A0"); // MAC
+// //
+// //         print('Connected to the device');
+// //
+// //         connection.input?.listen((Uint8List data) {
+// //           print('Data incoming: ${ascii.decode(data)}');
+// //           connection.output.add(data); // Sending data
+// //
+// //           if (ascii.decode(data).contains('!')) {
+// //             connection.finish(); // Closing connection
+// //             print('Disconnecting by local host');
+// //           }
+// //         }).onDone(() {
+// //           print('Disconnected by remote request');
+// //         });
+// //       } catch (exception) {
+// //         print('Cannot connect, exception occured');
+// //       }
+// //     }.call();
+//     }
   }
 
   final List<String> entries = <String>['A', 'B', 'C'];
@@ -152,10 +152,10 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
 
     return Scaffold(
-          backgroundColor: Colors.black54,
-          body: Column(
+        backgroundColor: Colors.black54,
+        body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
+            children: <Widget>[
               const Align(
                 alignment: Alignment.center,
                 heightFactor: 1.5,
@@ -199,10 +199,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   alignment: Alignment.center,
                   child: ElevatedButton(
                     onPressed: () {
-                      if (Platform.isWindows) {
-                        WinBle.startScanning();
-                      }
-                      Navigator.push(context, MaterialPageRoute(
+                      WinBle.startScanning();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
                               builder: (context) => DeviceList()));
                     },
                     style: ElevatedButton.styleFrom(
@@ -233,6 +233,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               )
             ])
-        );
+    );
   }
 }
